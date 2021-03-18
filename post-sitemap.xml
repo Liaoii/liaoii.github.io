@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>https://liaoii.github.io/2021/03/18/b001-redis01/</loc>
+        <lastmod>2021-03-18T15:19:37.604Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://liaoii.github.io/2017/03/18/hexo-theme-beantech/</loc>
-        <lastmod>2021-03-18T05:39:26.184Z</lastmod>
+        <lastmod>2021-03-18T15:19:37.604Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
