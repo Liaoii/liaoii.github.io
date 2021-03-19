@@ -79,7 +79,16 @@ ps -ef | grep redis
 cd /opt/redis/bin
 ./redis-cli shutdown
 ```
+## 设置密码
+
+```bash
+vim /opt/redis/bin/redis.conf
+# 找到requirepass，取消注释，设置密码
+requirepass "<your password>"
+```
+
 ## 连接测试
+
 ---
 ```bash
 cd /opt/redis/bin
