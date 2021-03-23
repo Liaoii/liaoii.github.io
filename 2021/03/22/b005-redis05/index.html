@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Liaoii&#39;s Blog
+          [Redis-05]Redis内存模型 - Liaoii&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/tags/Redis/">
+    <link rel="canonical" href="https://liaoii.github.io/2021/03/22/b005-redis05/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/undefined')
-            /*page*/
+            background-image: url('null')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Liaoii&#39;s Blog</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Make Progress Every Day</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
+                            
+                        </div>
+                        <h1>[Redis-05]Redis内存模型</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Liaoxi on
+                            2021-03-22
+                        </span>
                     </div>
                 
 
@@ -189,200 +197,199 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
-            
-            
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <h3><span id="redis内存模型图">Redis内存模型图</span></h3>
+<p><img src="memory-model.png" alt="Redis内存模型图"></p>
+<ul>
+<li>
+<p><strong>进程</strong></p>
+<p>Redis在启动时其主进程会占用一定的内存空间，这部分内存大约几M大小，但随着Redis数据量的增大，这部分内存空间占Redis总内存的比例会越来越小，甚至可以忽略。</p>
+</li>
+<li>
+<p><strong>数据</strong></p>
+<p>数据是Redis最主要的部分，它主要以键值对的方式进行存储，其中值包括五种类型：字符串、哈希、列表、集合和有序集合。每种类型的数据在Redis内部由不同的内部编码实现。</p>
+</li>
+<li>
+<p><strong>缓冲</strong></p>
+<p>缓冲内存包括客户端缓冲区、复制积压缓冲区、AOF缓冲区等；其中客户端缓冲区存储客户端连接的输入输出，复制积压缓冲区用于部分复制功能，AOF缓冲区用于AOF重写时保存最近的写入命令。</p>
+</li>
+<li>
+<p><strong>内存碎片</strong></p>
+<p>内存碎片是Redis在分配、回收物理内存过程中产生的，这些内存碎片无法被Redis继续有效的利用，但又占用着内存空间。如果Redis服务器中的内存碎片越来越大，可以通过安全重启的方式减小内存碎片，Redis在重启之后会重新从备份文件中读取数据，在内存中进行重排，从而减少了内存碎片。</p>
+</li>
+<li>
+<p><strong>虚拟内存</strong></p>
+<p>在系统内存不足时，Redis会使用虚拟内存，由于虚拟内存的媒介是磁盘，所以其速度会比内存慢很多。</p>
+</li>
+</ul>
+<h3><span id="redis内存统计">Redis内存统计</span></h3>
+<p>使用redis-cli连接Redis，使用info memory查看Redis内存统计</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:6380</span>&gt; <span class="selector-tag">info</span> <span class="selector-tag">memory</span></span><br><span class="line"># <span class="selector-tag">Memory</span></span><br><span class="line"><span class="selector-tag">used_memory</span><span class="selector-pseudo">:853600</span></span><br><span class="line"><span class="selector-tag">used_memory_human</span><span class="selector-pseudo">:833.59K</span></span><br><span class="line"><span class="selector-tag">used_memory_rss</span><span class="selector-pseudo">:7868416</span></span><br><span class="line"><span class="selector-tag">used_memory_rss_human</span><span class="selector-pseudo">:7.50M</span></span><br><span class="line"><span class="selector-tag">mem_fragmentation_ratio</span><span class="selector-pseudo">:9.22</span></span><br><span class="line"><span class="selector-tag">mem_allocator</span><span class="selector-pseudo">:jemalloc-5.1.0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>used_memory</strong></p>
+<p>由三部分组成：由Redis内存分配器分配的数据内存、缓冲内存、虚拟内存</p>
+</li>
+<li>
+<p><strong>used_memory_human</strong></p>
+<p>人性化的展示内存大小</p>
+</li>
+<li>
+<p><strong>used_memory_rss</strong></p>
+<p>从操作系统层面统计的Redis已使用的内存，包括数据内存、缓存内存、Redis进程启动内存，但不包括虚拟内存</p>
+</li>
+<li>
+<p><strong>used_memory_rss_human</strong></p>
+<p>人性化的展示内存大小</p>
+</li>
+<li>
+<p><strong>mem_fragmentation_ratio</strong></p>
+<p>该值表示内存碎片比率，是used_memory_rss与used_memory的比值。mem_fragmentation_ratio一般大于1，且该值越大，内存碎片比例越大（在Redis数据量很小时，该值也会很大，但并不代表内存碎片比例大）。mem_fragmentation_ratio小于1时，说明Redis使用了虚拟内存，由于虚拟内存的媒介是磁盘，比内存数据要慢很多，所以当这种情况出现时，要及时排查其原因并及时解决，比如增加Redis节点、增加Redis服务器的内存、优化应用等。</p>
+</li>
+<li>
+<p><strong>mem_allocator</strong></p>
+<p>Redis内存分配器，可选项为libc、jemalloc、tcmalloc，默认为jemalloc</p>
+</li>
+</ul>
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2021">
-                    <span class="tag-text">2021</span>
-                </span>
-                <ul>
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-22
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2021/03/22/b005-redis05/" style="color: #0085a1">
-                        <span>
-                            [Redis-05]Redis内存模型
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-20
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2021/03/20/b003-redis03/" style="color: #0085a1">
-                        <span>
-                            [Redis-03]Redis常用命令
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-18
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2021/03/18/b002-redis02/" style="color: #0085a1">
-                        <span>
-                            [Redis-02]安装Redis服务与配置开机启动
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-18
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2021/03/18/b001-redis01/" style="color: #0085a1">
-                        <span>
-                            [Redis-01]Redis单机安装
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2021/03/20/b003-redis03/" data-toggle="tooltip" data-placement="top" title="[Redis-03]Redis常用命令">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
             </div>
             
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
 
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Redis内存模型图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Redis内存统计</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
 
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
         </div>
     </div>
-</div>
+</article>
 
-                <!-- 如果开启评论功能 -->
-                
-            </div>
 
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
 
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="4">Redis</a>
-            
-        
-    </div>
-</section>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://liaoii.github.io/2021/03/22/b005-redis05/";
+    var disqus_url = "https://liaoii.github.io/2021/03/22/b005-redis05/";
 
-        
-            <img id = "avatar_pic" src="/img/ironman-draw.png" />
-        
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
-        
-            <p>Hi, i&#39;m Liaoii</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2021/03/22/b005-redis05/">[Redis-05]Redis内存模型</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/20/b003-redis03/">[Redis-03]Redis常用命令</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/18/b001-redis01/">[Redis-01]Redis单机安装</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/18/b002-redis02/">[Redis-02]安装Redis服务与配置开机启动</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
