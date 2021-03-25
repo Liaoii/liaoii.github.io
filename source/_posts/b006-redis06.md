@@ -193,13 +193,114 @@ jemalloc会根据目标需要使用的内存大小进行合理的分配：
 
 ### 总结
 
-lru在Redis 2.6版本中占22bit，在Redis 4.0版本中占24bit。所以综上所述一个redisObject的大小为：
-
-4bit(type) + 4bit(encoding) + 24bit(lru) + 4byte(refcount) + 8byte(ptr) = 16byte
+lru在Redis 2.6版本中占22bit，在Redis 4.0版本中占24bit。所以综上所述一个redisObject的大小为：4bit(type) + 4bit(encoding) + 24bit(lru) + 4byte(refcount) + 8byte(ptr) = 16byte
 
 ## SDS
 
 ---
 
+> C语言中字符串是以空字符 '\0' 结尾的字符数组，考虑到直接使用C语言字符串的缺陷，Redis对其进行了封装。SDS是简单动态字符串（Simple Dynamic String）的缩写。
 
+### Redis 3.2之前版本
 
+```c
+struct sdshdr {
+    int len;
+    int free;
+    char buf[];
+}
+```
+
+> len：记录buf数组中已使用字节的数量，也是SDS保存字符串的长度
+>
+> free：记录buf数组中未使用字节的数量
+>
+> buf[]：字节数组，用于保存字符串
+
+![sds](sds.png)
+
+buf数组中都是以'\0'结束的，所以buf数组的长度 = free的值 + len的值 + 1；一个SDS结构占据的空间 = free所占长度（4byte） + len所占长度(4byte) + buf数组的长度 + 1 = 字符串长度 + 9byte
+
+### Redis 3.2之后版本
+
+```c
+typedef char* sds;
+struct __attribute__((__packed__)) sdshdr5 {
+    unsigned char flags;
+    char buf[];
+};
+struct __attribute__((__packed__)) sdshdr8 {
+    uint8_t len;
+    uint8_t alloc;
+    unsigned char flags;
+    char buf[];
+};
+struct __attribute__((__packed__)) sdshdr16 {
+    uint16_t len;
+    uint16_t alloc;
+    unsigned char flags;
+    char buf[];
+};
+struct __attribute__((__packed__)) sdshdr32 {
+    uint32_t len;
+    uint32_t alloc;
+    unsigned char flags;
+    char buf[];
+};
+struct __attribute__((__packed__)) sdshdr64 {
+    uint64_t len;
+    uint64_t alloc;
+    unsigned char flags;
+    char buf[];
+};
+```
+
+在Redis 3.2版本之后的sds有五种结构：sdshdr5、sdshdr8、sdshdr16、sdshdr32、sdshdr64，Redis会根据字符串的长度使用不同的结构。
+
+> 当字符串的长度小于2^5时，使用sdshdr5结构
+>
+> 当字符串的长度在2^5与2^8之间时，使用sdshdr8结构
+>
+> 当字符串的长度在2^8与2^16之间时，使用sdshdr16结构
+>
+> 当字符串的长度在2^16与2^32之间时，使用sdshdr32结构
+>
+> 当字符串的长度大于2^32时，使用sdshdr64结构
+
+对于sdshdr8、sdshdr16、sdshdr32、sdshdr64的结构都是相同的
+
+> len：已使用长度，也就是字符串的实际长度，不包含'\0'
+>
+> alloc：分配的总长度，也不包含'\0'
+>
+> flags：类型的标志，用一个字节的低三位来保存，主要有SDS_TYPE_5、SDS_TYPE_8、SDS_TYPE_16、SDS_TYPE_32、SDS_TYPE_64，分别对应数字0、1、2、3、4
+>
+> buf[]：字符数组
+
+sdshdr5的结构
+
+> flags：低三位保存类型，高五位保存字符串的长度
+>
+> buf[]：字符数组
+
+### SDS与C字符串的比较
+
+- 获取字符串长度的时间复杂度
+
+  SDS的时间复杂度是O(1)，C字符串是O(n)
+
+- 缓冲区溢出
+
+  使用C字符串是，如果长度增加而忘记重新分配内存，很容易造成缓冲区溢出。SDS记录了长度，如果长度增加以致于超过了该长度，会重新分配内存，避免了缓冲区溢出
+
+- 修改字符串时内存的重新分配
+
+  对于C字符串，如果要修改字符串，必须要重新分配内存，如果没有重新分配，字符串长度增大时会造成内存缓冲区溢出，字符串长度减小时会造成内存泄露。而SDS可以通过空间预分配策略使得字符串长度增大时重新分配内存的概率大大减小，惰性空间释放策略使得字符串长度减小时重新分配内存的概率也大大减小。
+
+- 存储二进制数据
+
+  SDS可以存取二进制数据，但C字符串不可以。因为C字符串以空字符作为字符串结束的标识，对于一些二进制文件其内容可能包括空字符串，因此C字符串无法正确存取。而SDS记录了字符串的长度，因此知道字符串具体的结束位置
+
+- 其他
+
+  当SDS用来存储文本数据时其buf数组仍然使用了C字符串，因此SDS此时可以使用C字符串库中的部分函数。在存储二进制数据时则不能
