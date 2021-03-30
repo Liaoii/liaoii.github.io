@@ -1,5 +1,5 @@
 ---
-title: "[Redis-05]Redis数据存储的细节"
+title: "[Redis-06]Redis数据存储的细节"
 catalog: true
 date: 2021-03-23 19:41:35
 subtitle:
