@@ -209,9 +209,50 @@
 
 <div class="post-preview">
 
+    <a href="/2021/03/25/b007-redis07/">
+        <h2 class="post-title">
+            [Redis-07]Redis对象类型与内存编码
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            字符串（SDS）
+
+字符串是最基础的类型，所有的键都是字符串类型，且字符串之外的其他几种复杂类型的元素也是字符串
+字符串的长度不能超过512M
+字符串类型的内部编码有3种
+
+int
+8个字节的长整型。当字符串的值是整型时，这个值使用long整型表示
+embstr
+小于等于44字节的字符串
+raw
+大于44个字节的字符串
+embstr与raw的区别
+embstr与raw都使用redisObje......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-25
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/03/23/b006-redis06/">
         <h2 class="post-title">
-            [Redis-05]Redis数据存储的细节
+            [Redis-06]Redis数据存储的细节
         </h2>
         <h3 class="post-subtitle">
             
@@ -425,7 +466,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <div class="tags">
         
             
-            <a href="/tags/#Redis" title="Redis" rel="5">Redis</a>
+            <a href="/tags/#Redis" title="Redis" rel="6">Redis</a>
             
         
     </div>
@@ -471,7 +512,11 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
-          <a href="/2021/03/23/b006-redis06/">[Redis-05]Redis数据存储的细节</a>
+          <a href="/2021/03/25/b007-redis07/">[Redis-07]Redis对象类型与内存编码</a>
+        </li>
+      
+        <li>
+          <a href="/2021/03/23/b006-redis06/">[Redis-06]Redis数据存储的细节</a>
         </li>
       
         <li>
@@ -484,10 +529,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
       
         <li>
           <a href="/2021/03/18/b001-redis01/">[Redis-01]Redis单机安装</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/18/b002-redis02/">[Redis-02]安装Redis服务与配置开机启动</a>
         </li>
       
     </ul>
