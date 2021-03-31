@@ -209,6 +209,43 @@
 
 <div class="post-preview">
 
+    <a href="/2021/03/30/b008-redis08/">
+        <h2 class="post-title">
+            [Redis-08]Redis设计优化
+        </h2>
+        <h3 class="post-subtitle">
+            通过Redis内存模型与内存编码估算Redis内存使用量
+        </h3>
+        <div class="post-content-preview">
+            估算Redis内存使用量
+
+Redis中的数据的内存大小与Redis的内存模型以及对象的内存编码有关
+假设有100000个字符串类型的键值对，每个key的长度是12个字节，每个value的长度也是12个字节，且key和value都不是整数，要如何计算这100000个键值对所占的内存大小。
+
+首先，Redis的外层是一个hashtable，其结构如下：
+
+字符串的内存模型如下：
+
+Redis的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-30
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/03/25/b007-redis07/">
         <h2 class="post-title">
             [Redis-07]Redis对象类型与内存编码
@@ -466,7 +503,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <div class="tags">
         
             
-            <a href="/tags/#Redis" title="Redis" rel="6">Redis</a>
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
     </div>
@@ -512,6 +549,10 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
+          <a href="/2021/03/30/b008-redis08/">[Redis-08]Redis设计优化</a>
+        </li>
+      
+        <li>
           <a href="/2021/03/25/b007-redis07/">[Redis-07]Redis对象类型与内存编码</a>
         </li>
       
@@ -525,10 +566,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
       
         <li>
           <a href="/2021/03/20/b003-redis03/">[Redis-03]Redis常用命令</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/18/b001-redis01/">[Redis-01]Redis单机安装</a>
         </li>
       
     </ul>
