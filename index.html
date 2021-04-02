@@ -209,6 +209,40 @@
 
 <div class="post-preview">
 
+    <a href="/2021/04/02/b011-redis11/">
+        <h2 class="post-title">
+            [Redis-11]Redis主从复制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            什么是主从复制
+Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redis服务重启后会将硬盘上持久化的数据恢复到内存中。既然Redis的数据是持久化到硬盘的，如果Redis服务器的硬盘损坏，这时就可能导致数据的丢失。通过Redis的主从复制机制就可以避免这种单点故障问题。
+如图所示：
+
+说明：
+
+此时的Redis由多个Redis服务组成，其中一个作为主Redis，其他作为从R......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/04/01/b010-redis10/">
         <h2 class="post-title">
             [Redis-10]Redis持久化方案
@@ -585,7 +619,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <div class="tags">
         
             
-            <a href="/tags/#Redis" title="Redis" rel="9">Redis</a>
+            <a href="/tags/#Redis" title="Redis" rel="10">Redis</a>
             
         
     </div>
@@ -631,6 +665,10 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
+          <a href="/2021/04/02/b011-redis11/">[Redis-11]Redis主从复制</a>
+        </li>
+      
+        <li>
           <a href="/2021/04/01/b010-redis10/">[Redis-10]Redis持久化方案</a>
         </li>
       
@@ -644,10 +682,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
       
         <li>
           <a href="/2021/03/25/b007-redis07/">[Redis-07]Redis对象类型与内存编码</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/23/b006-redis06/">[Redis-06]Redis数据存储的细节</a>
         </li>
       
     </ul>
