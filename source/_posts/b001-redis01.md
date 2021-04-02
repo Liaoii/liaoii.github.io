@@ -1,7 +1,7 @@
 ---
 title: "[Redis-01]Redis单机安装"
 catalog: true
-date: 2021-03-18 20:35:47
+date: 2021-03-17 20:35:47
 subtitle: "CentOS7下安装Redis单机版"
 header-img:
 tags:
