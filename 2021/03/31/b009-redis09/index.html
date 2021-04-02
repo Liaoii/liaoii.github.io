@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [Redis-08]Redis设计优化 - Liaoii&#39;s Blog
+          [Redis-09]Redis内存淘汰机制 - Liaoii&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/2021/03/30/b008-redis08/">
+    <link rel="canonical" href="https://liaoii.github.io/2021/03/31/b009-redis09/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -89,11 +89,11 @@
                               <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
                             
                         </div>
-                        <h1>[Redis-08]Redis设计优化</h1>
-                        <h2 class="subheading">通过Redis内存模型与内存编码估算Redis内存使用量</h2>
+                        <h1>[Redis-09]Redis内存淘汰机制</h1>
+                        <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Liaoxi on
-                            2021-03-30
+                            2021-03-31
                         </span>
                     </div>
                 
@@ -210,44 +210,67 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="估算redis内存使用量">估算Redis内存使用量</span></h3>
+                <h2><span id="惰性删除">惰性删除</span></h2>
 <blockquote>
-<p>Redis中的数据的内存大小与Redis的内存模型以及对象的内存编码有关</p>
-<p>假设有100000个字符串类型的键值对，每个key的长度是12个字节，每个value的长度也是12个字节，且key和value都不是整数，要如何计算这100000个键值对所占的内存大小。</p>
+<p>根据实际的业务情况，为键值对设置一个合理的过期时间，当键值对存活了该时间之后，Redis会自动清除掉该过期的键值对。这样做可以节约对内存的占用，避免键值对过多的堆积，防止频繁的触发内存淘汰策略。</p>
 </blockquote>
-<p>首先，Redis的外层是一个hashtable，其结构如下：</p>
-<p><img src="hashtable.png" alt="hashtable"></p>
-<p>字符串的内存模型如下：</p>
-<p><img src="model.png" alt="Redis数据模型"></p>
-<p>Redis的外层是一个hashtable，其内存空间占用主要来自两部分：一部分是bucket指针所占用的空间，在64位操作系统中每个指针占用八个字节大小；另一部分来自所有dictEntry占用的空间。</p>
-<p><strong>dictEntry占用空间说明</strong></p>
+<p>Redis有四个命令可以用于设置键的生存时间或过期时间：</p>
 <ul>
-<li>dictEntry：一个dictEntry包含三个指针，一共占用24个字节，jemalloc会分配32字节的内存块</li>
-<li>key：key指向的是一个sds结构，所以其大小为12 + 4 = 16字节，jemalloc正好分配16个字节的内存块</li>
-<li>redisObject：一个redisObject占用16个字节的内存空间</li>
-<li>value：redisObject中的value指向的是一个sds结构，大小为12 + 4 = 16字节</li>
+<li>EXPIRE KEY_NAME SECONDS //设置key的生存时间，单位秒</li>
+<li>PEXPIRE KEY_NAME MILLISECONDS //设置key的生存时间，单位毫秒</li>
+<li>EXPIREAT KEY_NAME TIME_IN_UNIX_TIMESTAMP //将key的过期时间设置为指定的秒数时间戳</li>
+<li>PEXPIREAT KEY_NAME TIME_IN_MILLISECONDS_IN_UNIX_TIMESTAMP //将key的过期时间设置为指定的毫秒数时间戳</li>
 </ul>
-<p>综上所述，一个dictEntry所占的空间为32 + 16 + 16 + 16 = 80字节</p>
-<p><strong>bucket</strong></p>
-<p>bucket数组的大小为大于100000的最小的2^n，也就是131072，每个指针占用8字节，所以bucket占用的空间大小为：131072 * 8 = 1048576字节</p>
-<p>所以100000个键值对所占内存总大小为：100000 * 80 + 131072 * 8 = 9048576字节</p>
-<p>如果将key和value的长度由12字节增加到13字节，则对应的SDS变为17个字节，jemalloc将分配32个字节的内存空间，每个dictEntry占用的字节数也由80字节变为112字节，此时100000个键值对占据的内存大小变为：100000 * 112 + 131072 * 8 = 12248576字节。总内存大小从9048576字节增长到了12248576字节，增加了3200000字节，增加了32倍。</p>
-<h3><span id="优化内存占用">优化内存占用</span></h3>
-<p><strong>利用jemalloc特性进行优化</strong></p>
-<p>由于jemalloc分配内存时数值是不连续的，因此key或者value字符串变化一个字节，可能会引起占用内存很大的变动，在设计时可以利用这一点。比如一个key的长度是13字节，则sds为17字节，此时jemalloc将分配32字节；如果将key的长度缩减为12字节，则sds为16字节，jemalloc只需要分配16字节的内存即可，每个key所占用的空间都可以缩小一半。</p>
-<p><strong>使用整型/长整型</strong></p>
-<p>如果是整型或者长整型，Redis会使用8个字节的int类型来代替字符串，可以节省更多空间。因此在可以使用整型或者长整型的场景下，尽量使用整型或者长整型。</p>
-<p><strong>共享对象</strong></p>
-<p>利用共享对象，可以减少对象的创建，同时可以减少redisObject的创建，以节省内存空间。目前Redis中的共享对象只包括0~9999的整数。可以通过调整REDIS_SHARED_INTEGERS参数提高共享对象的个数。</p>
-<p>比如说Redis中存储了某个论坛的每个帖子的浏览数，而这些浏览数绝大多数分布在0~20000之间，这时就可以通过适当增大REDIS_SHARED_INTEGERS参数，便可以利用共享对象节省内存空间。</p>
-<p><strong>缩短键值对的存储长度</strong></p>
-<p>键值对的长度和性能成反比，Redis对于同一种数据类型会使用不同的内部编码进行存储，这样可以实现效率和空间的平衡。但数据量越大其使用的内部编码就越复杂，越复杂的内部编码存储的性能就越低。当键值对内容较大时还会带来如下问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6380&gt; <span class="built_in">set</span> pastKey pastValue</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; expire pastKey 20</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6380&gt; ttl pastKey</span><br><span class="line">(<span class="built_in">integer</span>) 14</span><br><span class="line">127.0.0.1:6380&gt; get pastKey</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+<h2><span id="lazy-free特性">lazy free特性</span></h2>
+<blockquote>
+<p>Redis 4.0中新增了lazy free功能，可以在删除的时候异步延时释放键值，把键值释放操作放在BIO单独的子线程中进行处理，以减少删除时对Redis主线程的阻塞，可以有效地避免删除比较大的key时带来的性能问题和可用性问题。</p>
+</blockquote>
+<p>lazy free对应了四种场景，默认都是关闭的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lazyfree-lazy-eviction no</span><br><span class="line">lazyfree-lazy-expire no</span><br><span class="line">lazyfree-lazy-server-del no</span><br><span class="line">slave-lazy-flush no</span><br></pre></td></tr></table></figure>
 <ul>
-<li>内容越大需要的持久化时间就越长，需要挂起的时间越长，Redis的性能就会越低。</li>
-<li>内容越大在网络上传输的内容就越多，需要的时间就越长，整体的运行速度就越低。</li>
-<li>内容越大占用的内存就越多，就会更频繁的触发内存淘汰机制，从而给Redis带来了更多的运行负担。</li>
+<li>lazyfree-lazy-eviction：当Redis运行内存超过最大内存时，是否开启lazy free机制删除</li>
+<li>lazyfree-lazy-expire：设置了过期时间的键值，当过期之后是否开启lazy free机制删除</li>
+<li>lazyfree-lazy-server-del：Redis中某些指令在处理已存在的键时，会带有一个隐式的删除键的操作，比如rename命令，当目标键已存在，Redis会先删除目标键，如果此时目标键是一个比较大的key，就会造成阻塞问题。此配置表示在这种场景中是否开启lazy free机制删除</li>
+<li>slave-lazy-flush：针对slave从节点进行全量数据同步时，slave在加载master的RDB文件前，会运行flushall来清理自己的数据。此配置表示在该场景下是否开启lazy free机制删除</li>
 </ul>
-<p>因此在保证完整语义的同时，要尽量缩短键值对的存储长度，必要时要对数据进行序列化和压缩再存储。在Java中可以使用protostuff或kryo进行序列化，使用snappy进行压缩。</p>
+<p>建议开启这四项配置，这样可以有效的提高主线程的执行效率。</p>
+<h2><span id="限制redis内存大小">限制Redis内存大小</span></h2>
+<blockquote>
+<p>通过maxmemory属性来指定Redis的内存大小，其单位可以是B、KB、MB、GB、K、M、G</p>
+</blockquote>
+<p>如果没有指定最大缓存，当有新数据添加进来超过了最大内存时，在32位操作系统中会使Redis崩溃，所以一定要设置最大缓存。</p>
+<p>在64位操作系统中Redis的内存大小没有限制，maxmemory配置项被注释掉，如果物理内存不足时，会使用swap交换空间作为虚拟内存，但是当操作系统将Redis所用的内存分页移至swap空间时，将会阻塞Redis进程，导致Redis出现延迟，从而影响Redis的整体性能。因此也需要限制Redis的内存大小为一个固定的值，当Redis的运行到达此值时会触发内存淘汰策略。</p>
+<h3><span id="lru">LRU</span></h3>
+<p>LRU（Least recently used，最近最少使用）根据数据的历史访问记录来淘汰数据，其核心思想是：如果数据最近被访问过，那么将来被访问的几率也更高。</p>
+<p>最常见的实现是使用一个链表来保存缓存数据：</p>
+<p><img src="lru.png" alt="lru"></p>
+<ul>
+<li>新数据将被插入到链表的头部</li>
+<li>每当缓存数据被访问，则将数据移到表的头部</li>
+<li>当链表满的时候，将链表尾部的数据丢弃</li>
+</ul>
+<h3><span id="lfu">LFU</span></h3>
+<p>LFU（Least Frequently Used，最少被使用）在一段时间内，数据被使用频次最少的，优先被淘汰。LFU是一种用于管理计算机内存的缓存算法，主要是记录和追踪内存块的使用次数，当缓存已满并且需要更多空间时，系统将以最低内存块使用频率清除内存。采用LFU算法的最简单方法是为每个加载到缓存的块分配一个计数器。每次引用该块时，计数器增加一。当缓存达到容量并有一个新的内存块等待插入时，系统将搜索计数器最低的块并将其从缓存中删除。</p>
+<h3><span id="lru与lfu比较">LRU与LFU比较</span></h3>
+<p>LRU和LFU侧重点不同，LRU主要体现在对元素的使用时间上，而LFU主要体现在对元素的使用频次上。LFU存在的一定的缺陷：在短期时间内，对某些缓存的访问频次很高，这些缓存会立刻晋升为热点数据，而保证不会被淘汰，这些缓存就将驻留在系统内存中，而实际上这部分数据只是短暂的高频率访问，之后将会长时间不被访问；另外，一些新加入的缓存也很容易被快速删除，因为它们的引用频率很低。</p>
+<h3><span id="redis缓存淘汰策略">Redis缓存淘汰策略</span></h3>
+<blockquote>
+<p>Redis内存数据集大小上升到一定大小的时候，就会实行缓存淘汰策略</p>
+<p>Redis使用maxmemory-policy来配置缓存淘汰策略</p>
+</blockquote>
+<p>Redis 4.0之后有8种缓存淘汰策略：</p>
+<ul>
+<li>noeviction：不淘汰任何数据，当内存不足时，新增操作会报错，Redis默认为该策略</li>
+<li>allkeys-lru：淘汰整个键值中最久未使用的键值</li>
+<li>allkeys-random：随机淘汰任意键值</li>
+<li>volatile-lru：淘汰所有设置了过期时间的键值中最久未使用的键值</li>
+<li>volatile-random：随机淘汰设置了过期时间的任意键值</li>
+<li>volatile-ttl：优先淘汰更早过期的键值</li>
+<li>volatile-lfu：淘汰所有设置了过期时间的键值中，最少使用的键值</li>
+<li>allkeys-lfu：淘汰整个键值中最少使用的键值</li>
+</ul>
+<p>其中allkeys-xxx表示从所有的键值中淘汰数据，而volatile-xxx表示从设置了过期时间的键值中淘汰数据。</p>
 
                 
 
@@ -255,9 +278,13 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2021/04/01/b010-redis10/" data-toggle="tooltip" data-placement="top" title="[Redis-10]Redis持久化方案">&larr; Previous Post</a>
+                        </li>
+                    
                     
                         <li class="next">
-                            <a href="/2021/03/25/b007-redis07/" data-toggle="tooltip" data-placement="top" title="[Redis-07]Redis对象类型与内存编码">Next Post &rarr;</a>
+                            <a href="/2021/03/29/b008-redis08/" data-toggle="tooltip" data-placement="top" title="[Redis-08]Redis设计优化">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -287,7 +314,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">估算Redis内存使用量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">优化内存占用</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">惰性删除</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">lazy free特性</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">限制Redis内存大小</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">LRU</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">LFU</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">LRU与LFU比较</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Redis缓存淘汰策略</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -327,8 +354,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "https://liaoii.github.io/2021/03/30/b008-redis08/";
-    var disqus_url = "https://liaoii.github.io/2021/03/30/b008-redis08/";
+    var disqus_identifier = "https://liaoii.github.io/2021/03/31/b009-redis09/";
+    var disqus_url = "https://liaoii.github.io/2021/03/31/b009-redis09/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

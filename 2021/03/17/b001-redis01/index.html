@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [Redis-02]安装Redis服务与配置开机启动 - Liaoii&#39;s Blog
+          [Redis-01]Redis单机安装 - Liaoii&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/2021/03/18/b002-redis02/">
+    <link rel="canonical" href="https://liaoii.github.io/2021/03/17/b001-redis01/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -89,11 +89,11 @@
                               <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
                             
                         </div>
-                        <h1>[Redis-02]安装Redis服务与配置开机启动</h1>
-                        <h2 class="subheading"></h2>
+                        <h1>[Redis-01]Redis单机安装</h1>
+                        <h2 class="subheading">CentOS7下安装Redis单机版</h2>
                         <span class="meta">
                             Posted by Liaoxi on
-                            2021-03-18
+                            2021-03-17
                         </span>
                     </div>
                 
@@ -210,32 +210,40 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="使用install_serversh安装服务">使用install_server.sh安装服务</span></h2>
+                <h2><span id="安装">安装</span></h2>
 <hr>
-<h3><span id="安装服务">安装服务</span></h3>
-<p>执行install_server.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/redis-5.0.9/utils/</span><br><span class="line">./install_server.sh</span><br></pre></td></tr></table></figure>
-<p>配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Please select the redis port <span class="keyword">for</span> this instance: [6379] 6380 <span class="comment"># 设置端口号</span></span><br><span class="line">Please select the redis config file name [/etc/redis/6380.conf] <span class="comment"># 配置文件位置</span></span><br><span class="line">Selected default - /etc/redis/6380.conf</span><br><span class="line">Please select the redis <span class="built_in">log</span> file name [/var/<span class="built_in">log</span>/redis_6380.log] <span class="comment"># 日志文件输出位置</span></span><br><span class="line">Selected default - /var/<span class="built_in">log</span>/redis_6380.log</span><br><span class="line">Please select the data directory <span class="keyword">for</span> this instance [/var/lib/redis/6380] <span class="comment"># 存放数据的位置</span></span><br><span class="line">Selected default - /var/lib/redis/6380</span><br><span class="line">Please select the redis executable path [] /opt/redis/bin/redis-server <span class="comment"># 设置redis可执行文件位置    </span></span><br><span class="line">Selected config:</span><br><span class="line">Port           : 6380</span><br><span class="line">Config file    : /etc/redis/6380.conf</span><br><span class="line">Log file       : /var/<span class="built_in">log</span>/redis_6380.log</span><br><span class="line">Data dir       : /var/lib/redis/6380</span><br><span class="line">Executable     : /opt/redis/bin/redis-server</span><br><span class="line">Cli Executable : /opt/redis/bin/redis-cli</span><br><span class="line">Is this ok? Then press ENTER to go on or Ctrl-C to abort. <span class="comment"># 按Enter确认</span></span><br><span class="line">Copied /tmp/6380.conf =&gt; /etc/init.d/redis_6380 <span class="comment"># 服务存放位置</span></span><br><span class="line">Installing service...</span><br><span class="line">Successfully added to chkconfig!</span><br><span class="line">Successfully added to runlevels 345!</span><br><span class="line">Starting Redis server...</span><br><span class="line">Installation successful!</span><br></pre></td></tr></table></figure>
-<h3><span id="修改配置文件">修改配置文件</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/redis/6380.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将daemonize由no改为yes，指定redis以守护线程的方式启动</span></span><br><span class="line">daemonize yes </span><br><span class="line"></span><br><span class="line"><span class="comment"># 注释掉bind 127.0.0.1这一行，如果不注释掉该行，将不能在其他机器上进行访问</span></span><br><span class="line"><span class="comment"># bind 127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭保护模式</span></span><br><span class="line">protected-mode no </span><br><span class="line"></span><br><span class="line"><span class="comment">#指定密码（可选）</span></span><br><span class="line">requirepass 123456</span><br></pre></td></tr></table></figure>
-<h3><span id="相关命令">相关命令</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service redis_6380 start <span class="comment"># 启动redis服务</span></span><br><span class="line">service redis_6380 stop <span class="comment"># 关闭redis服务</span></span><br><span class="line">service redis_6380 status <span class="comment"># 查看redis服务状态</span></span><br><span class="line">service redis_6380 restart <span class="comment"># 重启redis服务</span></span><br></pre></td></tr></table></figure>
-<p>这些命令在**/etc/init.d/redis_6380**文件中进行了配置</p>
-<h3><span id="查看日志">查看日志</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/<span class="built_in">log</span>/redis_6380.log</span><br></pre></td></tr></table></figure>
-<h2><span id="设置开机自启">设置开机自启</span></h2>
+<h3><span id="安装gcc与wget">安装gcc与wget</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc-c++</span><br><span class="line">yum install -y wget</span><br></pre></td></tr></table></figure>
+<h3><span id="下载源码包">下载源码包</span></h3>
+<p>进入<a href="https://download.redis.io/releases/?_ga=2.188597224.1988752644.1616078086-1814083321.1616078086" target="_blank" rel="noopener">Redis</a>下载页，在需要下载的版本连接上点击右键，复制链接地址</p>
+<p>我选择的是<strong>redis-5.0.9.tar.gz</strong>，地址为 <a href="https://download.redis.io/releases/redis-5.0.9.tar.gz" target="_blank" rel="noopener">https://download.redis.io/releases/redis-5.0.9.tar.gz</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt <span class="comment">#可根据自身需要进行选择</span></span><br><span class="line">wget https://download.redis.io/releases/redis-5.0.9.tar.gz</span><br></pre></td></tr></table></figure>
+<h3><span id="解压">解压</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf redis-5.0.9.tar.gz</span><br></pre></td></tr></table></figure>
+<h3><span id="编译amp安装">编译&amp;安装</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-5.0.9</span><br><span class="line">make</span><br><span class="line">make install PREFIX=/opt/redis</span><br></pre></td></tr></table></figure>
+<h2><span id="启动">启动</span></h2>
 <hr>
-<h3><span id="配置service">配置service</span></h3>
-<p>新增redis_6380.service文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/systemd/system/</span><br><span class="line">vim redis_6380.service</span><br></pre></td></tr></table></figure>
-<p>输入如下配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Redis server on 6380</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/init.d/redis_6380 start <span class="comment"># 启动</span></span><br><span class="line">ExecStop=/etc/init.d/redis_6380 stop <span class="comment"># 停止</span></span><br><span class="line">ExecReload=/etc/init.d/redis_6380 restart <span class="comment"># 重启</span></span><br><span class="line">Restart=always</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<h3><span id="设置开机自启">设置开机自启</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> redis_6380.service</span><br></pre></td></tr></table></figure>
-<h3><span id="重启测试">重启测试</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot <span class="comment"># 重启</span></span><br><span class="line">ps -ef | grep redis <span class="comment"># 验证redis是否启动</span></span><br></pre></td></tr></table></figure>
-
+<h3><span id="前端启动">前端启动</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/redis/bin</span><br><span class="line">./redis-server</span><br></pre></td></tr></table></figure>
+<p>启动页面如下：<br>
+<img src="start.png" alt="redis start"></p>
+<p>可以使用Ctrl+C停止当前服务</p>
+<p>使用前端启动的缺点是一旦当前命令行窗口被关闭，redis服务将自动停止</p>
+<h3><span id="后端启动">后端启动</span></h3>
+<p>拷贝并修改redis.conf配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/redis-5.0.9/redis.conf /opt/redis/bin/</span><br><span class="line">vim /opt/redis/bin/redis.conf</span><br><span class="line"><span class="comment"># 修改如下</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将daemonize由no改为yes，指定redis以守护线程的方式启动</span></span><br><span class="line">daemonize yes </span><br><span class="line"></span><br><span class="line"><span class="comment"># 注释掉bind 127.0.0.1这一行，如果不注释掉该行，将不能在其他机器上进行访问</span></span><br><span class="line"><span class="comment"># bind 127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭保护模式</span></span><br><span class="line">protected-mode no</span><br></pre></td></tr></table></figure>
+<p>启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/redis/bin</span><br><span class="line">./redis-server redis.conf</span><br></pre></td></tr></table></figure>
+<p>检查运行状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure>
+<p>关闭：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/redis/bin</span><br><span class="line">./redis-cli shutdown</span><br></pre></td></tr></table></figure>
+<h2><span id="设置密码">设置密码</span></h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /opt/redis/bin/redis.conf</span><br><span class="line"><span class="comment"># 找到requirepass，取消注释，设置密码</span></span><br><span class="line">requirepass <span class="string">"&lt;your password&gt;"</span></span><br></pre></td></tr></table></figure>
+<h2><span id="连接测试">连接测试</span></h2>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/redis/bin</span><br><span class="line">./redis-cli -h 127.0.0.1 -p 6379</span><br><span class="line"><span class="comment"># 或者使用如下命令</span></span><br><span class="line">./redis-cli</span><br></pre></td></tr></table></figure>
                 
 
                 <hr>
@@ -243,13 +251,9 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2021/03/20/b003-redis03/" data-toggle="tooltip" data-placement="top" title="[Redis-03]Redis常用命令">&larr; Previous Post</a>
+                            <a href="/2021/03/18/b002-redis02/" data-toggle="tooltip" data-placement="top" title="[Redis-02]安装Redis服务与配置开机启动">&larr; Previous Post</a>
                         </li>
                     
-                    
-                        <li class="next">
-                            <a href="/2021/03/17/b001-redis01/" data-toggle="tooltip" data-placement="top" title="[Redis-01]Redis单机安装">Next Post &rarr;</a>
-                        </li>
                     
                 </ul>
 
@@ -278,7 +282,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用install_server.sh安装服务</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">安装服务</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">修改配置文件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">相关命令</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">查看日志</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">设置开机自启</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">配置service</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">设置开机自启</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">重启测试</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">安装</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">安装gcc与wget</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">下载源码包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">解压</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">编译&amp;安装</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">启动</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">前端启动</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">后端启动</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">设置密码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">连接测试</span></a></li></ol>
         
         </div>
       </aside>
@@ -318,8 +322,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "https://liaoii.github.io/2021/03/18/b002-redis02/";
-    var disqus_url = "https://liaoii.github.io/2021/03/18/b002-redis02/";
+    var disqus_identifier = "https://liaoii.github.io/2021/03/17/b001-redis01/";
+    var disqus_url = "https://liaoii.github.io/2021/03/17/b001-redis01/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
