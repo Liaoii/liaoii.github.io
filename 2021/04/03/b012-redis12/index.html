@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [Redis-11]Redis主从复制 - Liaoii&#39;s Blog
+          [Redis-12]Redis Sentinel - Liaoii&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/2021/04/02/b011-redis11/">
+    <link rel="canonical" href="https://liaoii.github.io/2021/04/03/b012-redis12/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -89,11 +89,11 @@
                               <a class="tag" href="/tags/#Redis" title="Redis">Redis</a>
                             
                         </div>
-                        <h1>[Redis-11]Redis主从复制</h1>
-                        <h2 class="subheading"></h2>
+                        <h1>[Redis-12]Redis Sentinel</h1>
+                        <h2 class="subheading">Redis哨兵机制</h2>
                         <span class="meta">
                             Posted by Liaoxi on
-                            2021-04-02
+                            2021-04-03
                         </span>
                     </div>
                 
@@ -210,36 +210,50 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="什么是主从复制">什么是主从复制</span></h2>
-<p>Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redis服务重启后会将硬盘上持久化的数据恢复到内存中。既然Redis的数据是持久化到硬盘的，如果Redis服务器的硬盘损坏，这时就可能导致数据的丢失。通过Redis的主从复制机制就可以避免这种单点故障问题。</p>
-<p>如图所示：</p>
-<p><img src="master-slave.png" alt="主从复制"></p>
-<p>说明：</p>
+                <h3><span id="redis主从复制存在的问题">Redis主从复制存在的问题</span></h3>
+<p>在Redis主从架构中存在一个问题，那就是当服务出现宕机时需要手动恢复：</p>
 <ul>
-<li>此时的Redis由多个Redis服务组成，其中一个作为主Redis，其他作为从Redis。主Redis中的数据和从Redis中的数据会保持实时同步，当主Redis中写入数据时会通过主从复制机制将数据复制到其他从Redis上。</li>
-<li>在主从复制架构中，即使主Redis宕机了，其他的从Redis也能继续提供服务</li>
-<li>只能有一个主Redis，可以有多个从Redis，且数据只能从主Redis向从Redis复制</li>
-<li>主从复制不会阻塞主Redis，在同步数据时，主Redis可以继续处理客户端请求</li>
-<li>一个Redis可以既是主Redis又是从Redis</li>
+<li>从Redis宕机：如果从Redis宕机了，只需要将从Redis重新启动即可，从Redis在重新启动后会自动加入到主从架构中，并且自动完成数据的同步。在Redis 2.8版本后，从Redis断线后恢复只需要执行增量同步。</li>
+<li>主Redis宕机：当主Redis宕机了之后需要在从Redis中执行slaveof no one命令断开主从关系，并且将从Redis提升为主Redis继续服务。最后将宕机的主Redis重新启动并执行slaveof命令将其设置为其他主Redis的从Redis。</li>
 </ul>
-<h2><span id="实现原理">实现原理</span></h2>
-<blockquote>
-<p>Redis的主从同步分为全量同步和增量同步，当从机第一次连接上主机时需要进行全量同步。从机断线重连后主机会判断从机的runid是否一致，如果一致则进行增量同步，不一致则进行全量同步。除此之外的情况都是增量同步。</p>
-</blockquote>
-<p>其判断流程如下：</p>
-<p><img src="flow.png" alt="流程"></p>
-<h3><span id="全量同步"><strong>全量同步</strong></span></h3>
-<p>全量同步过程主要分三个阶段：</p>
+<p>手动进行恢复的过程比较麻烦并且容易出错，Redis为了解决这个问题提供了哨兵机制。</p>
+<h3><span id="哨兵机制的高可用">哨兵机制的高可用</span></h3>
+<p>由一个或多个Sentinel实例组成的Sentinel系统可以监视任意多个主服务器，以及这些主服务器属下的所有从服务器，并在被监视的主服务器进入下线状态时，自动将下线主服务器属下的某个从服务器升级为新的主服务器。</p>
+<p>正常状态：</p>
+<p><img src="sentinel-1.png" alt="正常状态"></p>
+<p>主服务宕机：</p>
+<p><img src="sentinel-2.png" alt="主服务宕机"></p>
+<p>选举新的主服务：</p>
+<p><img src="sentinel-3.png" alt="选举新的主服务"></p>
+<h3><span id="哨兵机制的定时监控">哨兵机制的定时监控</span></h3>
+<p>哨兵只需要配置对主节点的监控即可，通过向主节点发送info来获取从节点的信息，当有新的从节点加入时，哨兵可以马上感知到。然后每个哨兵节点每10秒会向主节点和从节点发送info命令以获取最新的拓扑结构图</p>
+<p>每个哨兵节点每隔2秒会向Redis数据节点的指定频道上发送该哨兵节点对于主节点的判断信息，以及自身哨兵节点的信息。其他的哨兵节点都订阅了该频道，也就是哨兵节点之间在互相通信，能够了解其他哨兵节点的信息以及其他哨兵节点对主节点的判断。这种通信是通过消息的publish和subscribe来完成的。</p>
+<p>每隔哨兵节点每隔1秒会向主节点、从节点以及其他哨兵节点发送一次ping命令进行心跳检测，这是哨兵节点用来判断节点是否正常的重要依据。</p>
+<p><strong>主观下线SDOWN</strong></p>
+<p>哨兵会以每秒一次的频率向所有与其建立了命令连接的实例发送ping命令，通过判断ping回复是有效回复还是无效回复来判断实例是否在线，对于该哨兵来说它对某个服务的判断是主观的。</p>
+<p>sentinel配置文件中的down-after-milliseconds设置了判断主观下线的时间长度，如果实例在down-after-milliseconds毫秒内返回的都是无效回复，那么sentinel会认为该实例已主观下线，然后修改其flags状态为SRI_S_DOWN。如果多个sentinel同时监视一个服务，有可能存在多个sentinel的down-after-milliseconds配置不同。</p>
+<p><strong>客观下线ODOWN</strong></p>
+<p>当被认为主观下线的节点是主节点时，此时该哨兵节点会通过指令sentinel is-masterdown-by-addr寻求其他哨兵节点对该主节点的判断，如果其他的哨兵也认为该主节点主观下线了，且主观下线的票数超过了quorum选举个数，此时哨兵节点就认为该主节点确实有问题，主观下线就变成了客观下线。也就是大部分哨兵节点都同意下线操作，该下线就是客观的。</p>
+<h3><span id="哨兵leader选举机制">哨兵leader选举机制</span></h3>
+<p>如果主节点被判定为客观下线，这时就需要选取一个哨兵节点来完成故障转移工作。首先，每个在线的哨兵节点都可以成为领导者，当它确认主节点下线时，会向其他哨兵发送is-master-down-by-addr命令，征求其他哨兵节点的判断并申请将自己设置为领导者，然后处理故障转移。其他哨兵节点收到此命令时，可以同意或拒绝它成为领导者。如果发起选举的哨兵节点发现自己选举的票数大于等于哨兵节点总数除2加1时，它就会成为领导者。如果没有达到数量，则继续选举。</p>
+<h3><span id="自动故障迁移机制">自动故障迁移机制</span></h3>
+<p>在sentinel的状态数据结构中保存了主服务的所有从服务信息，由leader选举机制选举出来的哨兵会从服务列表中挑选出新的主服务，其规则如下：</p>
 <ul>
-<li>同步快照阶段：Master创建并发送快照给Slave，Slave载入并解析快照。Master将该阶段产生的新的写命令存储到缓冲区。</li>
-<li>同步写缓冲阶段：Master向Slave同步存储在缓冲区的写操作命令</li>
-<li>同步增量阶段：Master向Slave同步写操作命令</li>
+<li>首先过滤掉主观下线的节点</li>
+<li>选择slave-priority最高的节点，如果没有则继续选择</li>
+<li>选择出复制偏移量最大的从节点，因为复制偏移量越大其数据复制的越完整，如果有就返回，没有就继续选择</li>
+<li>选择run_id最小的节点</li>
 </ul>
-<h3><span id="增量同步">增量同步</span></h3>
-<p>Redis增量同步主要指slave完成初始化后开始正常工作时，Master发生的写操作同步到Slave的过程。通常情况下，Master每执行一个写命令就会向Slave发送相同的写命令，然后Slave接收并执行</p>
-<h2><span id="主从配置">主从配置</span></h2>
-<p>修改从Redis中的redis.conf配置文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在配置中找到该处，指定主服务器的IP地址和端口号</span></span><br><span class="line"><span class="comment"># replicaof &lt;masterip&gt; &lt;masterport&gt;</span></span><br><span class="line"><span class="comment"># Redis 4.0版本之前使用slaveof</span></span><br><span class="line"><span class="string">slaveof</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">6379</span></span><br><span class="line"><span class="comment"># Redis 4.0版本之后默认为replicaof，但两种配置都可以起作用</span></span><br><span class="line"><span class="string">replicaof</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">6379</span></span><br></pre></td></tr></table></figure>
+<p>通过slaveof no one命令让选出来的从节点成为主节点，并通过slaveof命令让其他节点成为自己的从节点。当已下线的服务重新上线时，sentinel会向其发送slaveof命令，让其也成为自己的从节点。</p>
+<h3><span id="哨兵的作用">哨兵的作用</span></h3>
+<ul>
+<li>哨兵会不断地检查Master和Slave节点是否运行正常</li>
+<li>当被监控的Redis节点出现问题时，哨兵可以通过API向管理员或者其他应用程序发送通知</li>
+<li>当一个Master节点不能正常工作时，哨兵会进行自动故障迁移操作</li>
+</ul>
+<h3><span id="哨兵节点的搭建">哨兵节点的搭建</span></h3>
+<p>使用1主1从1哨兵来进行测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拷贝Redis源码包中的sentinel.conf文件到sentinel的执行文件目录</span></span><br><span class="line">cp /opt/redis-5.0.9/sentinel.conf /opt/sentinel/bin/sentinel.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改sentinel.conf配置文件</span></span><br><span class="line"><span class="comment">#将daemonize 修改为yes</span></span><br><span class="line">daemonize yes</span><br><span class="line"><span class="comment"># 指定要监听的主Redis的IP地址和端口号，以及认为其主观下线的哨兵节点数量</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 1</span><br><span class="line"><span class="comment"># 指定认为其下线的时间</span></span><br><span class="line">sentinel down-after-milliseconds mymaster 3000</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看主Redis的角色，其结果应该为master</span></span><br><span class="line">/opt/master/bin/redis-cli info|grep role</span><br><span class="line"><span class="comment"># kill掉主Redis的进程</span></span><br><span class="line"><span class="comment"># 查看从Redis的角色，此时应该变成master</span></span><br><span class="line">/opt/slave/bin/redis-cli info|grep role</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动已下线的服务并查看其角色，变成了slave</span></span><br></pre></td></tr></table></figure>
 
                 
 
@@ -247,13 +261,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/04/03/b012-redis12/" data-toggle="tooltip" data-placement="top" title="[Redis-12]Redis Sentinel">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2021/04/01/b010-redis10/" data-toggle="tooltip" data-placement="top" title="[Redis-10]Redis持久化方案">Next Post &rarr;</a>
+                            <a href="/2021/04/02/b011-redis11/" data-toggle="tooltip" data-placement="top" title="[Redis-11]Redis主从复制">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -283,7 +293,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">什么是主从复制</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">实现原理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">全量同步</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">增量同步</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">主从配置</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Redis主从复制存在的问题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">哨兵机制的高可用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">哨兵机制的定时监控</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">哨兵leader选举机制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">自动故障迁移机制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">哨兵的作用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">哨兵节点的搭建</span></a></li></ol>
         
         </div>
       </aside>
@@ -323,8 +333,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "https://liaoii.github.io/2021/04/02/b011-redis11/";
-    var disqus_url = "https://liaoii.github.io/2021/04/02/b011-redis11/";
+    var disqus_identifier = "https://liaoii.github.io/2021/04/03/b012-redis12/";
+    var disqus_url = "https://liaoii.github.io/2021/04/03/b012-redis12/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
