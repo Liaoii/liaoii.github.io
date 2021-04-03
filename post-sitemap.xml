@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>https://liaoii.github.io/2021/03/22/b005-redis05/</loc>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://liaoii.github.io/2021/03/29/b008-redis08/</loc>
-        <lastmod>2021-04-02T10:01:31.929Z</lastmod>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +24,7 @@
 
     <url>
         <loc>https://liaoii.github.io/2021/03/31/b009-redis09/</loc>
-        <lastmod>2021-04-02T10:01:31.929Z</lastmod>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -24,7 +32,7 @@
 
     <url>
         <loc>https://liaoii.github.io/2021/04/01/b010-redis10/</loc>
-        <lastmod>2021-04-02T10:01:31.929Z</lastmod>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -32,39 +40,7 @@
 
     <url>
         <loc>https://liaoii.github.io/2021/04/02/b011-redis11/</loc>
-        <lastmod>2021-04-02T10:01:31.929Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://liaoii.github.io/2021/03/17/b001-redis01/</loc>
-        <lastmod>2021-04-02T10:01:31.925Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://liaoii.github.io/2021/03/18/b002-redis02/</loc>
-        <lastmod>2021-04-02T10:01:31.925Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://liaoii.github.io/2021/03/20/b003-redis03/</loc>
-        <lastmod>2021-04-02T10:01:31.925Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://liaoii.github.io/2021/03/22/b005-redis05/</loc>
-        <lastmod>2021-04-02T10:01:31.925Z</lastmod>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -72,7 +48,7 @@
 
     <url>
         <loc>https://liaoii.github.io/2021/03/23/b006-redis06/</loc>
-        <lastmod>2021-04-02T10:01:31.925Z</lastmod>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -80,7 +56,31 @@
 
     <url>
         <loc>https://liaoii.github.io/2021/03/25/b007-redis07/</loc>
-        <lastmod>2021-04-02T10:01:31.925Z</lastmod>
+        <lastmod>2021-04-03T01:58:40.168Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://liaoii.github.io/2021/03/17/b001-redis01/</loc>
+        <lastmod>2021-04-03T01:58:40.164Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://liaoii.github.io/2021/03/18/b002-redis02/</loc>
+        <lastmod>2021-04-03T01:58:40.164Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://liaoii.github.io/2021/03/20/b003-redis03/</loc>
+        <lastmod>2021-04-03T01:58:40.164Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
