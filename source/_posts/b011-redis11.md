@@ -51,6 +51,11 @@ Redis增量同步主要指slave完成初始化后开始正常工作时，Master�
 修改从Redis中的redis.conf配置文件
 
 ```
-
+# 在配置中找到该处，指定主服务器的IP地址和端口号
+# replicaof <masterip> <masterport>
+# Redis 4.0版本之前使用slaveof
+slaveof 127.0.0.1 6379
+# Redis 4.0版本之后默认为replicaof，但两种配置都可以起作用
+replicaof 127.0.0.1 6379
 ```
 
