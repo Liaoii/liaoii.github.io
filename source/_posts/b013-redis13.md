@@ -294,7 +294,7 @@ OK
 
 ## Cluster水平扩容
 
-### 新增Master节点
+**新增Master节点**
 
 ```bash
 cd /opt/redis
@@ -336,7 +336,7 @@ S: 7cf1ca1ea1f2d41b546100d83076da4aa644afcf 127.0.0.1:8005
 [OK] New node added correctly.
 ```
 
-### 查看节点信息
+**查看节点信息**
 
 ```bash
 127.0.0.1:8003> cluster nodes
@@ -351,7 +351,7 @@ a32493f69b40c55fcd5e7b2248a2b9c3027b1bda 127.0.0.1:8002@18002 master - 0 1617514
 
 发现新增的节点还没有分配哈希槽
 
-### 分配哈希槽
+**分配哈希槽**
 
 ```bash
 ./redis-cli --cluster reshard 127.0.0.1:8003 --cluster-from 232d900d704d286986ba6b963dc86744e57aaefc,a32493f69b40c55fcd5e7b2248a2b9c3027b1bda,3d4b17b4948d4ff339071d868410e9e59ea2a28e --cluster-to 27b1063fbd2789429448293f59bbe75be1ae775c
@@ -398,7 +398,7 @@ Moving slot 12254 from 127.0.0.1:8003 to 127.0.0.1:8007:
 Moving slot 12255 from 127.0.0.1:8003 to 127.0.0.1:8007: 
 ```
 
-### 查看新状态
+**查看新状态**
 
 ```bash
 127.0.0.1:8001> cluster nodes
@@ -413,7 +413,7 @@ a32493f69b40c55fcd5e7b2248a2b9c3027b1bda 127.0.0.1:8002@18002 master - 0 1617515
 
 新的节点已经分配了哈希槽
 
-### 新增Slave节点
+**新增Slave节点**
 
 ```bash
 cd /opt/redis
@@ -422,7 +422,7 @@ cp -r 8001 8008
 # 启动服务
 ```
 
-添加节点到集群
+**添加节点到集群**
 
 ```bash
 ./redis-cli --cluster add-node 127.0.0.1:8008 127.0.0.1:8001 --cluster-slave --cluster-master-id 27b1063fbd2789429448293f59bbe75be1ae775c
@@ -461,7 +461,7 @@ Waiting for the cluster to join
 [OK] New node added correctly.
 ```
 
-查看新的节点状态
+**查看新的节点状态**
 
 ```bash
 127.0.0.1:8001> cluster nodes
