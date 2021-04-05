@@ -209,6 +209,40 @@
 
 <div class="post-preview">
 
+    <a href="/2021/04/05/b015-redis15/">
+        <h2 class="post-title">
+            [Redis-15]Redis消息模式
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            队列模式
+
+利用list类型的lpush和rpop来实现消息队列，lpush用来发送消息，rpop用来取出消息
+
+
+演示
+12345678910# 发送消息127.0.0.1:6379&gt; lpush queue message01(integer) 1127.0.0.1:6379&gt; lpush queue message02(integer) 1# 在另一个连接中取出消息127.......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/04/04/b014-redis14/">
         <h2 class="post-title">
             [Redis-14]Redis各类型应用
@@ -576,47 +610,6 @@ redisObject
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/03/22/b005-redis05/">
-        <h2 class="post-title">
-            [Redis-05]Redis内存模型
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Redis内存模型图
-
-
-
-进程
-Redis在启动时其主进程会占用一定的内存空间，这部分内存大约几M大小，但随着Redis数据量的增大，这部分内存空间占Redis总内存的比例会越来越小，甚至可以忽略。
-
-
-数据
-数据是Redis最主要的部分，它主要以键值对的方式进行存储，其中值包括五种类型：字符串、哈希、列表、集合和有序集合。每种类型的数据在Redis内部由不同的内部编码实现。
-
-
-缓冲
-缓......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-22
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -653,7 +646,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <div class="tags">
         
             
-            <a href="/tags/#Redis" title="Redis" rel="13">Redis</a>
+            <a href="/tags/#Redis" title="Redis" rel="14">Redis</a>
             
         
     </div>
@@ -699,6 +692,10 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
+          <a href="/2021/04/05/b015-redis15/">[Redis-15]Redis消息模式</a>
+        </li>
+      
+        <li>
           <a href="/2021/04/04/b014-redis14/">[Redis-14]Redis各类型应用</a>
         </li>
       
@@ -712,10 +709,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
       
         <li>
           <a href="/2021/04/02/b011-redis11/">[Redis-11]Redis主从复制</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/01/b010-redis10/">[Redis-10]Redis持久化方案</a>
         </li>
       
     </ul>
