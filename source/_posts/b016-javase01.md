@@ -454,3 +454,39 @@ public enum OverrideConstantSpecific {
 }
 ```
 
+### 使用enum实现职责链设计模式
+
+> 在职责链设计模式中，程序员以多种不同的方式来解决一个问题，然后将它们链接在一起。当一个请求到来时，它遍历这个链，直到链中的某个解决方案能够处理该请求。
+
+```java
+public class Handler {
+    enum ProblemHandler {
+        STEP_ONE {
+            boolean handle(Object obj) {
+                // do something there
+                return false;
+            }
+        },
+        STEP_TWO {
+            boolean handle(Object obj) {
+                // do something there
+                return false;
+            }
+        },
+        STEP_THREE {
+            boolean handle(Object obj) {
+                // do something there
+                return true;
+            }
+        };
+        abstract boolean handle(Object obj);
+    }
+    static void handle() {
+        for (ProblemHandler handler : ProblemHandler.values()) {
+            if (handler.handle(null))
+                return;
+        }
+        System.out.println("处理失败");
+    }
+}
+```
