@@ -209,7 +209,7 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/09/b035-javase20/">
+    <a href="/2021/04/20/b035-javase20/">
         <h2 class="post-title">
             注解
         </h2>
@@ -227,7 +227,7 @@
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-09
+            2021-04-20
         </p>
         <div class="tags">
             
@@ -241,7 +241,7 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/07/b034-javase19/">
+    <a href="/2021/04/19/b034-javase19/">
         <h2 class="post-title">
             枚举
         </h2>
@@ -259,7 +259,36 @@
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-07
+            2021-04-19
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/04/06/b021-javase06/">
+        <h2 class="post-title">
+            访问权限控制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            为什么需要进行访问权限控制
+对于客户端程序员来说，他总是希望自己所使用的那一部分类库不会出现变化，否则永远无法保证程序能够稳定运行。但对于类库的开发者来说，他总是希望对自己的代码进行不断的重构与优化，使其变得更加完美。当类库的开发者想要对自己的代码进行重构与优化时，由于不知道客户端程序员具体使用了类中的哪些成员，此时所做出的任何一个改动都有可能破坏客户端程序员的代码，也就是说，类库开发者将无......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-06
         </p>
         <div class="tags">
             
@@ -552,43 +581,6 @@ PEXPIRE KEY_NAME MILL......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/03/29/b008-redis08/">
-        <h2 class="post-title">
-            [Redis-08]Redis设计优化
-        </h2>
-        <h3 class="post-subtitle">
-            通过Redis内存模型与内存编码估算Redis内存使用量
-        </h3>
-        <div class="post-content-preview">
-            估算Redis内存使用量
-
-Redis中的数据的内存大小与Redis的内存模型以及对象的内存编码有关
-假设有100000个字符串类型的键值对，每个key的长度是12个字节，每个value的长度也是12个字节，且key和value都不是整数，要如何计算这100000个键值对所占的内存大小。
-
-首先，Redis的外层是一个hashtable，其结构如下：
-
-字符串的内存模型如下：
-
-Redis的......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-29
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -629,7 +621,7 @@ Redis的......
             
         
             
-            <a href="/tags/#JavaSE" title="JavaSE" rel="2">JavaSE</a>
+            <a href="/tags/#JavaSE" title="JavaSE" rel="3">JavaSE</a>
             
         
     </div>
@@ -675,11 +667,15 @@ Redis的......
     <ul>
       
         <li>
-          <a href="/2021/04/09/b035-javase20/">注解</a>
+          <a href="/2021/04/20/b035-javase20/">注解</a>
         </li>
       
         <li>
-          <a href="/2021/04/07/b034-javase19/">枚举</a>
+          <a href="/2021/04/19/b034-javase19/">枚举</a>
+        </li>
+      
+        <li>
+          <a href="/2021/04/06/b021-javase06/">访问权限控制</a>
         </li>
       
         <li>
@@ -688,10 +684,6 @@ Redis的......
       
         <li>
           <a href="/2021/04/04/b014-redis14/">[Redis-14]Redis各类型应用</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/03/b013-redis13/">[Redis-13]Redis集群演变</a>
         </li>
       
     </ul>
