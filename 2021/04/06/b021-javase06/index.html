@@ -302,6 +302,10 @@
 <p>通过访问权限控制来设定客户端程序员可以使用和不可以使用的界限，并以此来将接口与具体实现进行分离。客户端程序员可以使用的那一部分定义为接口，而具体实现是客户端程序员无法使用的。这样做的目的在于类库的开发者可以随意修改所有不是public的东西，而不会破坏客户端程序员的代码。</p>
 <p>为了便于客户端程序员阅读源码，一种做法是将所有的public成员置于开头，后面跟着protected、包访问权限和private成员。这样来的使用者可以从头读起，等遇到作为内部实现细节的非public成员时停止。</p>
 <p>这样做仅能使程序阅读起来稍微容易一些，因为接口和具体实现仍旧混合在一起。其最终的解决方案是通过interface关键字来创建接口，使用接口将客户端程序员可以访问的部分完全独立出来。</p>
+<h3><span id="类的访问权限">类的访问权限</span></h3>
+<p>访问权限修饰词用于类之上时可以确定该类对于客户端程序员是否是可用的，访问权限修饰词必须位于class关键字之前。对于类的访问权限与类中成员的访问权限的关系，通常是成员的访问权限要小于等于类的访问权限。但如果一个具有包访问权限的类只能用于包内，那将该类的成员的访问权限设定为public也没有关系，但该public不代表它可以被当前包以外的其他类所访问。也就是需要优先判断类的访问权限。</p>
+<p>对于public的static成员或方法，即使类只有包访问权限，客户端程序员还是可以通过类来引用static成员或方法。</p>
+<p>类的访问权限只能是public或者包访问权限，不能是private或者protected。</p>
 
                 
 
@@ -345,7 +349,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">为什么需要进行访问权限控制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">都有哪些访问权限修饰词</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">访问权限修饰词</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">封装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">接口与实现</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">为什么需要进行访问权限控制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">都有哪些访问权限修饰词</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">访问权限修饰词</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">封装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">接口与实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">类的访问权限</span></a></li></ol>
         
         </div>
       </aside>
