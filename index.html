@@ -273,6 +273,38 @@
 
 <div class="post-preview">
 
+    <a href="/2021/04/07/b022-javase07/">
+        <h2 class="post-title">
+            复用类
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            使用组合进行复用
+
+在新的类中产生现有类的对象叫做组合。组合只是复用了现有程序代码的功能，而非它的形式。对于非基本类型的对象，必须将其引用置于新类中，而对于基本类型数据则可以直接定义。
+
+1234567891011121314151617class WaterSource &#123;    private String s;    WaterSource() &#123;        S......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/04/06/b021-javase06/">
         <h2 class="post-title">
             访问权限控制
@@ -546,41 +578,6 @@ RDB持久化是通过快照完成的，当符合一定条件时Redis会自动将
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/03/31/b009-redis09/">
-        <h2 class="post-title">
-            [Redis-09]Redis内存淘汰机制
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            惰性删除
-
-根据实际的业务情况，为键值对设置一个合理的过期时间，当键值对存活了该时间之后，Redis会自动清除掉该过期的键值对。这样做可以节约对内存的占用，避免键值对过多的堆积，防止频繁的触发内存淘汰策略。
-
-Redis有四个命令可以用于设置键的生存时间或过期时间：
-
-EXPIRE KEY_NAME SECONDS //设置key的生存时间，单位秒
-PEXPIRE KEY_NAME MILL......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-31
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -621,7 +618,7 @@ PEXPIRE KEY_NAME MILL......
             
         
             
-            <a href="/tags/#JavaSE" title="JavaSE" rel="3">JavaSE</a>
+            <a href="/tags/#JavaSE" title="JavaSE" rel="4">JavaSE</a>
             
         
     </div>
@@ -675,15 +672,15 @@ PEXPIRE KEY_NAME MILL......
         </li>
       
         <li>
+          <a href="/2021/04/07/b022-javase07/">复用类</a>
+        </li>
+      
+        <li>
           <a href="/2021/04/06/b021-javase06/">访问权限控制</a>
         </li>
       
         <li>
           <a href="/2021/04/05/b015-redis15/">[Redis-15]Redis消息模式</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/04/b014-redis14/">[Redis-14]Redis各类型应用</a>
         </li>
       
     </ul>
