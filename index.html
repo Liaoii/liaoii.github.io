@@ -209,6 +209,34 @@
 
 <div class="post-preview">
 
+    <a href="/2021/04/25/b040-pattern03/">
+        <h2 class="post-title">
+            观察者模式
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            ...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-25
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/04/24/b039-pattern02/">
         <h2 class="post-title">
             策略模式
@@ -219,9 +247,14 @@
         <div class="post-content-preview">
             策略模式
 策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。
+相关设计原则
+
+找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起
+针对接口编程，而不是针对实现编程
+多用组合，少用继承
+
 使用继承来进行设计
-Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于不同品种的鸭子具有不同的样子，所以display()设计成抽象方法。现有三个导出类MallardDuck、RedheadDuck、RubberDuck。
-1234567891011121......
+Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于不同品种的鸭子具有不同的样子，所以......
         </div>
     </a>
     
@@ -532,45 +565,6 @@ Zset
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/04/03/b013-redis13/">
-        <h2 class="post-title">
-            [Redis-13]Redis集群演变
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            主从复制
-
-主从复制虽然解决了单点故障问题，但是当主Redis或者从Redis出现问题时需要进行手动处理，这个处理过程不仅麻烦还容易出错。
-
-主从复制+哨兵
-
-在主从复制的基础上加上哨兵机制，可以进行自动故障转移，解决了手动处理故障时带来的问题。
-
-架构图
-
-工作原理
-当Redis Master节点宕机的时候，Sentinel会选举出新的Master，并根据Sentinel中的client-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-03
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -615,7 +609,7 @@ Zset
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="2">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="3">Design Patterns</a>
             
         
     </div>
@@ -661,6 +655,10 @@ Zset
     <ul>
       
         <li>
+          <a href="/2021/04/25/b040-pattern03/">观察者模式</a>
+        </li>
+      
+        <li>
           <a href="/2021/04/24/b039-pattern02/">策略模式</a>
         </li>
       
@@ -674,10 +672,6 @@ Zset
       
         <li>
           <a href="/2021/04/19/b034-javase19/">枚举</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/17/b024-javase09/">接口</a>
         </li>
       
     </ul>
