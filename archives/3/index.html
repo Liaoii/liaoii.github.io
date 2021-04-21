@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/">
+    <link rel="canonical" href="https://liaoii.github.io/archives/3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -209,357 +209,28 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/24/b039-pattern02/">
+    <a href="/2021/03/17/b001-redis01/">
         <h2 class="post-title">
-            策略模式
+            [Redis-01]Redis单机安装
         </h2>
         <h3 class="post-subtitle">
-            
+            CentOS7下安装Redis单机版
         </h3>
         <div class="post-content-preview">
-            策略模式
-策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。
-使用继承来进行设计
-Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于不同品种的鸭子具有不同的样子，所以display()设计成抽象方法。现有三个导出类MallardDuck、RedheadDuck、RubberDuck。
-1234567891011121......
+            安装
+
+安装gcc与wget
+12yum install -y gcc-c++yum install -y wget
+下载源码包
+进入Redis下载页，在需要下载的版本连接上点击右键，复制链接地址
+我选择的是redis-5.0.9.tar.gz，地址为 https://download.redis.io/releases/redis-5.0.9.tar.gz
+12cd /opt #可根据自身......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-24
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/23/b038-pattern01/">
-        <h2 class="post-title">
-            设计原则
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            设计原则
-
-找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起
-针对接口编程，而不是针对实现编程
-多用组合，少用继承
-
-...
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-23
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/20/b035-javase20/">
-        <h2 class="post-title">
-            注解
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            定义注解
-123456@Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface UseCase &#123;    int id();    String description() default "no description";&#125;
-特性
-
-注解的定义使用@interface来......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/19/b034-javase19/">
-        <h2 class="post-title">
-            枚举
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            新建一个枚举到底发生了什么
-新建一个枚举类
-123enum Explore &#123;	HERE, THERE&#125;
-对其进行反编译
-1234567final class Explore extends java.lang.Enum &#123;	public static final Explore HERE;	public static final Explore THERE;	......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-19
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/17/b024-javase09/">
-        <h2 class="post-title">
-            接口
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            为什么需要接口
-
-提供一种将接口与实现分离的更加结构化的方法
-可以进行多重继承，使其能够向上转型为多个基类型
-防止客户端程序员创建该接口的对象
-
-抽象类和抽象方法
-
-抽象类是介于普通类与接口之间的一种中庸之道。
-
-为什么需要抽象类和抽象方法
-基类存在的目的是为了给它的所有导出类创建一个通用接口，不同的子类可以用不同的方式表示此接口。通用接口建立起一种基本形式，以此表示所有导出类的共同部分。
-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/12/b022-javase07/">
-        <h2 class="post-title">
-            复用类
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            使用组合进行复用
-
-在新的类中产生现有类的对象叫做组合。组合只是复用了现有程序代码的功能，而非它的形式。对于非基本类型的对象，必须将其引用置于新类中，而对于基本类型数据则可以直接定义。
-
-1234567891011121314151617class WaterSource &#123;    private String s;    WaterSource() &#123;        S......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-12
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/11/b021-javase06/">
-        <h2 class="post-title">
-            访问权限控制
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            为什么需要进行访问权限控制
-对于客户端程序员来说，他总是希望自己所使用的那一部分类库不会出现变化，否则永远无法保证程序能够稳定运行。但对于类库的开发者来说，他总是希望对自己的代码进行不断的重构与优化，使其变得更加完美。当类库的开发者想要对自己的代码进行重构与优化时，由于不知道客户端程序员具体使用了类中的哪些成员，此时所做出的任何一个改动都有可能破坏客户端程序员的代码，也就是说，类库开发者将无......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/05/b015-redis15/">
-        <h2 class="post-title">
-            [Redis-15]Redis消息模式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            队列模式
-
-利用list类型的lpush和rpop来实现消息队列，lpush用来发送消息，rpop用来取出消息
-
-
-演示
-12345678910# 发送消息127.0.0.1:6379&gt; lpush queue message01(integer) 1127.0.0.1:6379&gt; lpush queue message02(integer) 1# 在另一个连接中取出消息127.......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/04/b014-redis14/">
-        <h2 class="post-title">
-            [Redis-14]Redis各类型应用
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            String
-
-数据缓存功能
-计数器
-共享用户Session
-
-Hash
-
-数据缓存功能
-
-List
-
-按插入顺序存储的可重复的集合
-
-
-存储列表结构的数据，比如：粉丝列表、好友列表、文章评论
-基于lrange的高性能分页
-简单的消息队列
-
-Set
-
-无序且不可重复的集合
-
-
-基于分布式的全局去重
-对数据进行交集、差集、并集
-
-Zset
-
-按自然顺序排序且不可重复的集合
-
-
-利用自然排序特性......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-04
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/03/b013-redis13/">
-        <h2 class="post-title">
-            [Redis-13]Redis集群演变
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            主从复制
-
-主从复制虽然解决了单点故障问题，但是当主Redis或者从Redis出现问题时需要进行手动处理，这个处理过程不仅麻烦还容易出错。
-
-主从复制+哨兵
-
-在主从复制的基础上加上哨兵机制，可以进行自动故障转移，解决了手动处理故障时带来的问题。
-
-架构图
-
-工作原理
-当Redis Master节点宕机的时候，Sentinel会选举出新的Master，并根据Sentinel中的client-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-03
+            2021-03-17
         </p>
         <div class="tags">
             
@@ -577,10 +248,10 @@ Zset
 
 <ul class="pager">
     
-    
-        <li class="next">
-            <a href="/archives/2/">Older Posts &rarr;</a>
+        <li class="previous">
+            <a href="/archives/2/">&larr; Newer Posts</a>
         </li>
+    
     
 </ul>
 

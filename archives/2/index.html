@@ -209,6 +209,119 @@
 
 <div class="post-preview">
 
+    <a href="/2021/04/03/b012-redis12/">
+        <h2 class="post-title">
+            [Redis-12]Redis Sentinel
+        </h2>
+        <h3 class="post-subtitle">
+            Redis哨兵机制
+        </h3>
+        <div class="post-content-preview">
+            Redis主从复制存在的问题
+在Redis主从架构中存在一个问题，那就是当服务出现宕机时需要手动恢复：
+
+从Redis宕机：如果从Redis宕机了，只需要将从Redis重新启动即可，从Redis在重新启动后会自动加入到主从架构中，并且自动完成数据的同步。在Redis 2.8版本后，从Redis断线后恢复只需要执行增量同步。
+主Redis宕机：当主Redis宕机了之后需要在从Redis中执行s......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/04/02/b011-redis11/">
+        <h2 class="post-title">
+            [Redis-11]Redis主从复制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            什么是主从复制
+Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redis服务重启后会将硬盘上持久化的数据恢复到内存中。既然Redis的数据是持久化到硬盘的，如果Redis服务器的硬盘损坏，这时就可能导致数据的丢失。通过Redis的主从复制机制就可以避免这种单点故障问题。
+如图所示：
+
+说明：
+
+此时的Redis由多个Redis服务组成，其中一个作为主Redis，其他作为从R......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/04/01/b010-redis10/">
+        <h2 class="post-title">
+            [Redis-10]Redis持久化方案
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+Redis是一个内存数据库，为了保证数据的持久性，它提供了三种持久化方案：
+
+
+RDB（默认）
+
+
+AOF
+
+
+混合持久化模式（Redis 4.0版本新增，Redis 5.0版本默认使用该方案）
+
+
+
+RDB(Redis Database)
+
+Redis默认使用RDB持久化方式
+RDB持久化是通过快照完成的，当符合一定条件时Redis会自动将内存中的数据进行快照并持久化到硬盘
+
+设置快照规......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-01
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/03/31/b009-redis09/">
         <h2 class="post-title">
             [Redis-09]Redis内存淘汰机制
@@ -471,41 +584,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/03/17/b001-redis01/">
-        <h2 class="post-title">
-            [Redis-01]Redis单机安装
-        </h2>
-        <h3 class="post-subtitle">
-            CentOS7下安装Redis单机版
-        </h3>
-        <div class="post-content-preview">
-            安装
-
-安装gcc与wget
-12yum install -y gcc-c++yum install -y wget
-下载源码包
-进入Redis下载页，在需要下载的版本连接上点击右键，复制链接地址
-我选择的是redis-5.0.9.tar.gz，地址为 https://download.redis.io/releases/redis-5.0.9.tar.gz
-12cd /opt #可根据自身......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -516,6 +594,10 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
             <a href="/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/archives/3/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -546,7 +628,11 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
             
         
             
-            <a href="/tags/#JavaSE" title="JavaSE" rel="4">JavaSE</a>
+            <a href="/tags/#JavaSE" title="JavaSE" rel="5">JavaSE</a>
+            
+        
+            
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="2">Design Patterns</a>
             
         
     </div>
@@ -592,6 +678,14 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
+          <a href="/2021/04/24/b039-pattern02/">策略模式</a>
+        </li>
+      
+        <li>
+          <a href="/2021/04/23/b038-pattern01/">设计原则</a>
+        </li>
+      
+        <li>
           <a href="/2021/04/20/b035-javase20/">注解</a>
         </li>
       
@@ -600,15 +694,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
         </li>
       
         <li>
-          <a href="/2021/04/12/b022-javase07/">复用类</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/11/b021-javase06/">访问权限控制</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/05/b015-redis15/">[Redis-15]Redis消息模式</a>
+          <a href="/2021/04/17/b024-javase09/">接口</a>
         </li>
       
     </ul>
