@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          访问权限控制 - Liaoii&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://liaoii.github.io/2021/02/06/b021-javase06/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('null')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
+                            
+                        </div>
+                        <h1>访问权限控制</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Liaoxi on
+                            2021-02-06
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Liaoii&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3><span id="为什么需要进行访问权限控制">为什么需要进行访问权限控制</span></h3>
+<p>对于客户端程序员来说，他总是希望自己所使用的那一部分类库不会出现变化，否则永远无法保证程序能够稳定运行。但对于类库的开发者来说，他总是希望对自己的代码进行不断的重构与优化，使其变得更加完美。当类库的开发者想要对自己的代码进行重构与优化时，由于不知道客户端程序员具体使用了类中的哪些成员，此时所做出的任何一个改动都有可能破坏客户端程序员的代码，也就是说，类库开发者将无法对任何事物进行改动。</p>
+<p>为了解决这一问题，Java提供了访问权限修饰词，以供类库开发人员向客户端程序员指明哪些是可用的，哪些是不可用的。此时，类库的开发者对那些客户端程序员不可用的部分进行重构与优化就不会影响到客户端程序员的代码了。</p>
+<h3><span id="都有哪些访问权限修饰词">都有哪些访问权限修饰词</span></h3>
+<p>访问权限控制的等级，从最大权限到最小权限依次有：public、protected、包访问权限、private，各自能访问的范围如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>同一个类</th>
+<th>同一个包</th>
+<th>不同包的子类</th>
+<th>不同包的非子类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>public</strong></td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td><strong>protected</strong></td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>包访问权限</strong></td>
+<td>√</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>private</strong></td>
+<td>√</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3><span id="包">包</span></h3>
+<p><strong>为什么需要包</strong></p>
+<p>如果将所有的类文件都放在默认包下，就需要保证每一个类的名称都不重复。这对于一个代码库而言或许可以做到，但在构建一个大型系统时往往会用到各种各样不同的代码库，且这些库往往由不同的团队编写，要保证这些团队的代码库彼此之间都不重复几乎是不可能的。</p>
+<p>通过包可以为一个类指定名称空间。如果约定在使用类时必须在类名前加上名称空间，并且以名称空间加上类名来判断两个类是否冲突，相比于直接使用类名进行比较，其冲突的概率会大大降低。但如果多个团队之间使用了相同的名称空间，并且在该名称空间下包含了相同名称的类，那么冲突依然可能会发生。我们要做的，就是避免使用相同的名称空间，一种方案就是使用反顺序的域名作为名称空间，由于域名是独一无二的，所以名称空间也将是独一无二的，前提是不要使用其他人的域名。</p>
+<p><strong>指定包</strong></p>
+<p>通过<strong>package</strong>关键字来指定一个类的包结构，也就是名称空间。它必须是文件中除注释以外的第一句程序代码。</p>
+<p>包名一般全部使用小写字母。</p>
+<p><strong>默认包</strong></p>
+<p>如果一个类没有通过package指定包，那么它就是隶属于该类所在目录的默认包之中</p>
+<p><strong>包的原理以及类是如何被加载的</strong></p>
+<p>首先，需要将.class文件所在的路径位置编码成package的名称，这个路径实际上是相对于环境变量中某个路径的相对路径。</p>
+<p>当Java程序运行并且需要加载 .class 文件时，会通过包的名称与CLASSPATH中的路径共同来查找 .class 文件的位置。CLASSPATH中包含一个或多个目录，这些目录将用作查找 .class 文件的根目录，Java解释器获取包的名称并将每个句点替换成反斜杠，得到的路径再与CLASSPATH中的各个不同的路径相连接，Java解释器会在这些最终生成的路径中查找需要加载的 .class 文件。</p>
+<p>注意，无论何时创建类，都已经通过类的包的名称指定了目录结构。必须将此类放在所指定的目录之中，且该目录必须是在以CLASSPATH开始的目录中可以查询到。</p>
+<p>在CLASSPATH中使用jar文件时必须在类路径中将jar文件的实际名称写清楚，而不仅是指明它所在位置的目录。</p>
+<p><strong>使用一个类的方式</strong></p>
+<p>要使用一个类，必须指明其所在的名称空间，也就是使用一个类的全类名：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FullQualification</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        java.util.List list = <span class="keyword">new</span> java.util.ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">"Hello"</span>);</span><br><span class="line">        list.add(<span class="string">"World"</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>通过导入来简化代码</strong></p>
+<p>使用import关键字来导入一个类，就可以直接通过其类名来使用类了，这样可以使代码更简洁。</p>
+<p>可以通过 ***** 来导入一个包里的所有类，但是<strong>不会递归导入其子包中的类</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">E02_UseImport</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        list.add(<span class="string">"Hello"</span>);</span><br><span class="line">        list.add(<span class="string">"World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>导入时可能出现的冲突</strong></p>
+<p>当以 ***** 形式同时导入多个类库时，如果这些类库中存在相同名称的类，那么就有可能产生冲突。但只要不使用那些存在冲突的类，便没有问题。当使用的类存在于多个通过 ***** 导入的类库中时，就必须明确指明其名称空间，有两种方式：一种是使用全类名的方式来使用类；另一种是明确导入要使用的类，但不能明确导入两个名称相同的类。</p>
+<p><strong>静态导入</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.java.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printnb</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        System.out.print(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> PrintStream <span class="title">printf</span><span class="params">(String format, Object... args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> System.out.printf(format, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.java.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> com.java.util.Print.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">E03_StaticImport</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        print(<span class="string">"Available from now on!"</span>);</span><br><span class="line">        print(<span class="string">"10000"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>编译单元</strong></p>
+<p>Java源代码文件被称为编译单元，编译单元以 .java 为后缀。在编译单元内部可以有一个或多个类，但最多只能有一个public类。如果编译单元内有public类，则该public类的名称必须与文件的名称保持一致。当然编译单元中也可以没有public类，这些非public的类只能在当前包中被访问。</p>
+<p>当一个 .java 文件被编译时，其中的每一个类都会产生一个以 .class 为后缀的字节码文件。因此，编译少量的 .java 文件可能会得到大量的 .class 文件。这些 .class 文件将由Java解释器进行查找、装载和解释执行。</p>
+<h3><span id="访问权限修饰词">访问权限修饰词</span></h3>
+<p><strong>public：接口访问权限</strong></p>
+<p>使用public关键字，意味着public之后紧跟着的成员声明自己对每个人都是可用的，尤其是使用类库的客户端程序员更是如此。</p>
+<p><strong>protected：继承访问权限</strong></p>
+<p>protected表示把对它的访问权限赋予派生类而不是所有类。同时，相同包内的其他类可以访问protected元素。</p>
+<p><strong>包访问权限</strong></p>
+<p>默认访问权限也就是包访问权限没有任何关键字，对于拥有包访问权限的成员只能由同一个包中的类进行访问，对于这个包之外的所有其他类来说这个成员是private的。由于一个编译单元中的类是隶属于一个包，所以同一个编译单元中的所有类彼此之间可以相互访问。</p>
+<p>包访问权限将包内所有相关的类组合起来，以使它们彼此之间可以轻松地相互访问。包访问权限对客户端程序员来说起到了充足的隐藏效果，客户端程序员无法访问类库中拥有包访问权限的成员。</p>
+<p><strong>private：私有权限</strong></p>
+<p>关键字private的意思是，除了包含该成员的类之外，其他任何类都无法访问这个成员。同一个包内的其他类也无法访问private成员，当有许多人共同创建一个包的代码时，private可以防止自身的代码影响到包内其他的类。所以，可以将任何只是&quot;助手&quot;的方法指定为private，这样就为自己保留了修改它的权限。对于类的域来说，除非需要公开底层的实现细节，否则就应该将所有的域指定为private。</p>
+<p>在多线程环境下，private显得尤其重要。</p>
+<h3><span id="封装">封装</span></h3>
+<p>封装是面向对象的三大特性之一，它将数据和方法包装进类中，并通过访问权限控制来隐藏具体的实现细节，其结果是一个同时带有特征和行为的数据类型。</p>
+<h3><span id="接口与实现">接口与实现</span></h3>
+<p>通过访问权限控制来设定客户端程序员可以使用和不可以使用的界限，并以此来将接口与具体实现进行分离。客户端程序员可以使用的那一部分定义为接口，而具体实现是客户端程序员无法使用的。这样做的目的在于类库的开发者可以随意修改所有不是public的东西，而不会破坏客户端程序员的代码。</p>
+<p>为了便于客户端程序员阅读源码，一种做法是将所有的public成员置于开头，后面跟着protected、包访问权限和private成员。这样来的使用者可以从头读起，等遇到作为内部实现细节的非public成员时停止。</p>
+<p>这样做仅能使程序阅读起来稍微容易一些，因为接口和具体实现仍旧混合在一起。其最终的解决方案是通过interface关键字来创建接口，使用接口将客户端程序员可以访问的部分完全独立出来。</p>
+<h3><span id="类的访问权限">类的访问权限</span></h3>
+<p>访问权限修饰词用于类之上时可以确定该类对于客户端程序员是否是可用的，访问权限修饰词必须位于class关键字之前。对于类的访问权限与类中成员的访问权限的关系，通常是成员的访问权限要小于等于类的访问权限。但如果一个具有包访问权限的类只能用于包内，那将该类的成员的访问权限设定为public也没有关系，但该public不代表它可以被当前包以外的其他类所访问。也就是需要优先判断类的访问权限。</p>
+<p>对于public的static成员或方法，即使类只有包访问权限，客户端程序员还是可以通过类来引用static成员或方法。</p>
+<p>类的访问权限只能是public或者包访问权限，不能是private或者protected。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2021/02/07/b022-javase07/" data-toggle="tooltip" data-placement="top" title="复用类">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2021/01/15/b015-redis15/" data-toggle="tooltip" data-placement="top" title="[Redis-15]Redis消息模式">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">为什么需要进行访问权限控制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">都有哪些访问权限修饰词</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">访问权限修饰词</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">封装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">接口与实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">类的访问权限</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://liaoii.github.io/2021/02/06/b021-javase06/";
+    var disqus_url = "https://liaoii.github.io/2021/02/06/b021-javase06/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Liaoxi 2021 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://liaoii.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'https://liaoii.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://liaoii.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

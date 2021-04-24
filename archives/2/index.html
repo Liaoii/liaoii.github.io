@@ -209,7 +209,41 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/04/b014-redis14/">
+    <a href="/2021/01/15/b015-redis15/">
+        <h2 class="post-title">
+            [Redis-15]Redis消息模式
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            队列模式
+
+利用list类型的lpush和rpop来实现消息队列，lpush用来发送消息，rpop用来取出消息
+
+
+演示
+12345678910# 发送消息127.0.0.1:6379&gt; lpush queue message01(integer) 1127.0.0.1:6379&gt; lpush queue message02(integer) 1# 在另一个连接中取出消息127.......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-01-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/01/14/b014-redis14/">
         <h2 class="post-title">
             [Redis-14]Redis各类型应用
         </h2>
@@ -255,7 +289,7 @@ Zset
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-04
+            2021-01-14
         </p>
         <div class="tags">
             
@@ -269,7 +303,7 @@ Zset
 
 <div class="post-preview">
 
-    <a href="/2021/04/03/b013-redis13/">
+    <a href="/2021/01/13/b013-redis13/">
         <h2 class="post-title">
             [Redis-13]Redis集群演变
         </h2>
@@ -294,7 +328,7 @@ Zset
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-03
+            2021-01-13
         </p>
         <div class="tags">
             
@@ -308,7 +342,7 @@ Zset
 
 <div class="post-preview">
 
-    <a href="/2021/04/03/b012-redis12/">
+    <a href="/2021/01/12/b012-redis12/">
         <h2 class="post-title">
             [Redis-12]Redis Sentinel
         </h2>
@@ -326,7 +360,7 @@ Zset
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-03
+            2021-01-12
         </p>
         <div class="tags">
             
@@ -340,7 +374,7 @@ Zset
 
 <div class="post-preview">
 
-    <a href="/2021/04/02/b011-redis11/">
+    <a href="/2021/01/11/b011-redis11/">
         <h2 class="post-title">
             [Redis-11]Redis主从复制
         </h2>
@@ -360,7 +394,7 @@ Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redi
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-02
+            2021-01-11
         </p>
         <div class="tags">
             
@@ -374,7 +408,7 @@ Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redi
 
 <div class="post-preview">
 
-    <a href="/2021/04/01/b010-redis10/">
+    <a href="/2021/01/10/b010-redis10/">
         <h2 class="post-title">
             [Redis-10]Redis持久化方案
         </h2>
@@ -407,7 +441,7 @@ RDB持久化是通过快照完成的，当符合一定条件时Redis会自动将
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-01
+            2021-01-10
         </p>
         <div class="tags">
             
@@ -421,7 +455,7 @@ RDB持久化是通过快照完成的，当符合一定条件时Redis会自动将
 
 <div class="post-preview">
 
-    <a href="/2021/03/31/b009-redis09/">
+    <a href="/2021/01/09/b009-redis09/">
         <h2 class="post-title">
             [Redis-09]Redis内存淘汰机制
         </h2>
@@ -442,7 +476,7 @@ PEXPIRE KEY_NAME MILL......
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-03-31
+            2021-01-09
         </p>
         <div class="tags">
             
@@ -456,7 +490,7 @@ PEXPIRE KEY_NAME MILL......
 
 <div class="post-preview">
 
-    <a href="/2021/03/29/b008-redis08/">
+    <a href="/2021/01/07/b008-redis08/">
         <h2 class="post-title">
             [Redis-08]Redis设计优化
         </h2>
@@ -479,7 +513,7 @@ Redis的......
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-03-29
+            2021-01-07
         </p>
         <div class="tags">
             
@@ -493,7 +527,7 @@ Redis的......
 
 <div class="post-preview">
 
-    <a href="/2021/03/25/b007-redis07/">
+    <a href="/2021/01/07/b007-redis07/">
         <h2 class="post-title">
             [Redis-07]Redis对象类型与内存编码
         </h2>
@@ -520,7 +554,7 @@ embstr与raw都使用redisObje......
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-03-25
+            2021-01-07
         </p>
         <div class="tags">
             
@@ -534,7 +568,7 @@ embstr与raw都使用redisObje......
 
 <div class="post-preview">
 
-    <a href="/2021/03/23/b006-redis06/">
+    <a href="/2021/01/06/b006-redis06/">
         <h2 class="post-title">
             [Redis-06]Redis数据存储的细节
         </h2>
@@ -564,48 +598,7 @@ redisObject
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-03-23
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/22/b005-redis05/">
-        <h2 class="post-title">
-            [Redis-05]Redis内存模型
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Redis内存模型图
-
-
-
-进程
-Redis在启动时其主进程会占用一定的内存空间，这部分内存大约几M大小，但随着Redis数据量的增大，这部分内存空间占Redis总内存的比例会越来越小，甚至可以忽略。
-
-
-数据
-数据是Redis最主要的部分，它主要以键值对的方式进行存储，其中值包括五种类型：字符串、哈希、列表、集合和有序集合。每种类型的数据在Redis内部由不同的内部编码实现。
-
-
-缓冲
-缓......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-22
+            2021-01-06
         </p>
         <div class="tags">
             
@@ -665,7 +658,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="3">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
             
         
     </div>
@@ -711,23 +704,23 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
-          <a href="/2021/04/25/b040-pattern03/">观察者模式（Observer）</a>
+          <a href="/2021/03/04/b041-pattern04/">装饰者模式（Decorator）</a>
         </li>
       
         <li>
-          <a href="/2021/04/24/b039-pattern02/">策略模式（Strategy）</a>
+          <a href="/2021/03/03/b040-pattern03/">观察者模式（Observer）</a>
         </li>
       
         <li>
-          <a href="/2021/04/23/b038-pattern01/">设计原则</a>
+          <a href="/2021/03/02/b039-pattern02/">策略模式（Strategy）</a>
         </li>
       
         <li>
-          <a href="/2021/04/20/b035-javase20/">注解</a>
+          <a href="/2021/03/01/b038-pattern01/">设计原则</a>
         </li>
       
         <li>
-          <a href="/2021/04/19/b034-javase19/">枚举</a>
+          <a href="/2021/02/20/b035-javase20/">注解</a>
         </li>
       
     </ul>

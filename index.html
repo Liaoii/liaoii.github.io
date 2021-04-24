@@ -209,7 +209,41 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/25/b040-pattern03/">
+    <a href="/2021/03/04/b041-pattern04/">
+        <h2 class="post-title">
+            装饰者模式（Decorator）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            抛出需求
+有一个咖啡店需要设计它的订单系统，首先是各种种类的咖啡，且在购买咖啡时，可以根据需求加入各种调料。最后会根据咖啡的类型和所加入的调料收取不同的费用。
+
+第一种实现方式
+
+在基类中通过Boolean类型的成员变量来表示是否加入了某种调料，cost()方法用来计算这些调料的价格，子类的cost()方法通过调用基类的cost()来获取调料的总价格，再加上自身的价格来得到总的价格。
+123......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/03/03/b040-pattern03/">
         <h2 class="post-title">
             观察者模式（Observer）
         </h2>
@@ -236,7 +270,7 @@
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-25
+            2021-03-03
         </p>
         <div class="tags">
             
@@ -250,7 +284,7 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/24/b039-pattern02/">
+    <a href="/2021/03/02/b039-pattern02/">
         <h2 class="post-title">
             策略模式（Strategy）
         </h2>
@@ -273,7 +307,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-24
+            2021-03-02
         </p>
         <div class="tags">
             
@@ -287,7 +321,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/23/b038-pattern01/">
+    <a href="/2021/03/01/b038-pattern01/">
         <h2 class="post-title">
             设计原则
         </h2>
@@ -301,18 +335,19 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 针对接口编程，而不是针对实现编程
 多用组合，少用继承
 为了交互对象之间的松耦合设计而努力
+类应该对扩展开放，对修改关闭
 
 设计模式
 策略模式（Strategy）
 策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。
 观察者模式（Observer）
-观察者模式定义了对象之间的一对多依赖......
+观察者......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-23
+            2021-03-01
         </p>
         <div class="tags">
             
@@ -326,7 +361,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/20/b035-javase20/">
+    <a href="/2021/02/20/b035-javase20/">
         <h2 class="post-title">
             注解
         </h2>
@@ -344,7 +379,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-20
+            2021-02-20
         </p>
         <div class="tags">
             
@@ -358,7 +393,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/19/b034-javase19/">
+    <a href="/2021/02/19/b034-javase19/">
         <h2 class="post-title">
             枚举
         </h2>
@@ -376,7 +411,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-19
+            2021-02-19
         </p>
         <div class="tags">
             
@@ -390,7 +425,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/17/b024-javase09/">
+    <a href="/2021/02/09/b024-javase09/">
         <h2 class="post-title">
             接口
         </h2>
@@ -416,7 +451,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-17
+            2021-02-09
         </p>
         <div class="tags">
             
@@ -430,7 +465,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/13/b023-javase08/">
+    <a href="/2021/02/08/b023-javase08/">
         <h2 class="post-title">
             多态
         </h2>
@@ -446,7 +481,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-13
+            2021-02-08
         </p>
         <div class="tags">
             
@@ -460,7 +495,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/12/b022-javase07/">
+    <a href="/2021/02/07/b022-javase07/">
         <h2 class="post-title">
             复用类
         </h2>
@@ -478,7 +513,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-12
+            2021-02-07
         </p>
         <div class="tags">
             
@@ -492,7 +527,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 
 <div class="post-preview">
 
-    <a href="/2021/04/11/b021-javase06/">
+    <a href="/2021/02/06/b021-javase06/">
         <h2 class="post-title">
             访问权限控制
         </h2>
@@ -507,45 +542,11 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-11
+            2021-02-06
         </p>
         <div class="tags">
             
               <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/05/b015-redis15/">
-        <h2 class="post-title">
-            [Redis-15]Redis消息模式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            队列模式
-
-利用list类型的lpush和rpop来实现消息队列，lpush用来发送消息，rpop用来取出消息
-
-
-演示
-12345678910# 发送消息127.0.0.1:6379&gt; lpush queue message01(integer) 1127.0.0.1:6379&gt; lpush queue message02(integer) 1# 在另一个连接中取出消息127.......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
             
         </div>
     
@@ -597,7 +598,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="3">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
             
         
     </div>
@@ -643,23 +644,23 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     <ul>
       
         <li>
-          <a href="/2021/04/25/b040-pattern03/">观察者模式（Observer）</a>
+          <a href="/2021/03/04/b041-pattern04/">装饰者模式（Decorator）</a>
         </li>
       
         <li>
-          <a href="/2021/04/24/b039-pattern02/">策略模式（Strategy）</a>
+          <a href="/2021/03/03/b040-pattern03/">观察者模式（Observer）</a>
         </li>
       
         <li>
-          <a href="/2021/04/23/b038-pattern01/">设计原则</a>
+          <a href="/2021/03/02/b039-pattern02/">策略模式（Strategy）</a>
         </li>
       
         <li>
-          <a href="/2021/04/20/b035-javase20/">注解</a>
+          <a href="/2021/03/01/b038-pattern01/">设计原则</a>
         </li>
       
         <li>
-          <a href="/2021/04/19/b034-javase19/">枚举</a>
+          <a href="/2021/02/20/b035-javase20/">注解</a>
         </li>
       
     </ul>
