@@ -1,7 +1,7 @@
 ---
 title: "[Redis-02]安装Redis服务与配置开机启动"
 catalog: true
-date: 2021-03-18 20:35:47
+date: 2021-01-02 20:35:47
 subtitle: 
 header-img:
 tags:

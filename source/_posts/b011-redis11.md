@@ -1,7 +1,7 @@
 ---
 title: "[Redis-11]Redis主从复制"
 catalog: true
-date: 2021-04-02 13:13:46
+date: 2021-01-11 13:13:46
 subtitle:
 header-img:
 tags:

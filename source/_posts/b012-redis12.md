@@ -1,7 +1,7 @@
 ---
 title: "[Redis-12]Redis Sentinel"
 catalog: true
-date: 2021-04-03 11:08:18
+date: 2021-01-12 11:08:18
 subtitle: "Redis哨兵机制"
 header-img:
 tags:
