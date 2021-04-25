@@ -209,6 +209,50 @@
 
 <div class="post-preview">
 
+    <a href="/2021/01/06/b006-redis06/">
+        <h2 class="post-title">
+            [Redis-06]Redis数据存储的细节
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Redis数据模型
+
+执行一条简单的命令set keyStr valueStr，Redis中的数据模型是怎样的呢？
+
+
+
+dictEntry
+Redis中的数据是以键值对的方式进行存储的，每个键值对都会有一个对应的dictEntry，包含三个部分：
+
+key：指向key的指针
+value：指向value的指针
+next：指向下一个dictEntry
+
+
+
+redisObject
+对于Redi......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-01-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/01/05/b005-redis05/">
         <h2 class="post-title">
             [Redis-05]Redis内存模型
@@ -393,7 +437,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="5">Design Patterns</a>
             
         
     </div>
@@ -439,6 +483,10 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
+          <a href="/2021/04/24/b042-pattern05/">简单工厂（Factory）</a>
+        </li>
+      
+        <li>
           <a href="/2021/03/04/b041-pattern04/">装饰者模式（Decorator）</a>
         </li>
       
@@ -452,10 +500,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
       
         <li>
           <a href="/2021/03/01/b038-pattern01/">设计原则</a>
-        </li>
-      
-        <li>
-          <a href="/2021/02/20/b035-javase20/">注解</a>
         </li>
       
     </ul>

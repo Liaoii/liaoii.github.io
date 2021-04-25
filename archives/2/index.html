@@ -209,6 +209,35 @@
 
 <div class="post-preview">
 
+    <a href="/2021/02/06/b021-javase06/">
+        <h2 class="post-title">
+            访问权限控制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            为什么需要进行访问权限控制
+对于客户端程序员来说，他总是希望自己所使用的那一部分类库不会出现变化，否则永远无法保证程序能够稳定运行。但对于类库的开发者来说，他总是希望对自己的代码进行不断的重构与优化，使其变得更加完美。当类库的开发者想要对自己的代码进行重构与优化时，由于不知道客户端程序员具体使用了类中的哪些成员，此时所做出的任何一个改动都有可能破坏客户端程序员的代码，也就是说，类库开发者将无......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-02-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/01/15/b015-redis15/">
         <h2 class="post-title">
             [Redis-15]Redis消息模式
@@ -566,50 +595,6 @@ embstr与raw都使用redisObje......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/01/06/b006-redis06/">
-        <h2 class="post-title">
-            [Redis-06]Redis数据存储的细节
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Redis数据模型
-
-执行一条简单的命令set keyStr valueStr，Redis中的数据模型是怎样的呢？
-
-
-
-dictEntry
-Redis中的数据是以键值对的方式进行存储的，每个键值对都会有一个对应的dictEntry，包含三个部分：
-
-key：指向key的指针
-value：指向value的指针
-next：指向下一个dictEntry
-
-
-
-redisObject
-对于Redi......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-01-06
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -658,7 +643,7 @@ redisObject
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="5">Design Patterns</a>
             
         
     </div>
@@ -704,6 +689,10 @@ redisObject
     <ul>
       
         <li>
+          <a href="/2021/04/24/b042-pattern05/">简单工厂（Factory）</a>
+        </li>
+      
+        <li>
           <a href="/2021/03/04/b041-pattern04/">装饰者模式（Decorator）</a>
         </li>
       
@@ -717,10 +706,6 @@ redisObject
       
         <li>
           <a href="/2021/03/01/b038-pattern01/">设计原则</a>
-        </li>
-      
-        <li>
-          <a href="/2021/02/20/b035-javase20/">注解</a>
         </li>
       
     </ul>
