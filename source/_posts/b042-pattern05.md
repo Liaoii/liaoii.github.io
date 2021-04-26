@@ -1,7 +1,7 @@
 ---
-title: "简单工厂（Factory）"
+title: "简单工厂（Simple Factory）"
 catalog: true
-date: 2021-04-24 21:16:21
+date: 2021-03-05 21:16:21
 subtitle:
 header-img:
 tags:
