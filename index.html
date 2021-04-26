@@ -209,7 +209,41 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/26/b044-pattern07/">
+    <a href="/2021/03/08/b045-pattern08/">
+        <h2 class="post-title">
+            单件模式（Singleton）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            抛出问题
+有一些对象我们只需要一个，这类对象只能有一个实例，如果制造出多个实例，就会导致许多问题产生。
+使用全局静态变量实现单实例
+缺点
+如果将对象赋值给一个全局变量，那么必须在程序一开始就创建好对象，如果这个对象非常耗费资源，而程序在这次的执行过程中又一直没有用到它，那就会造成资源的浪费。
+经典的单件模式实现
+12345678910public class Singleton &#123;......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-08
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/03/07/b044-pattern07/">
         <h2 class="post-title">
             抽象工厂模式（Abstract Factory）
         </h2>
@@ -227,7 +261,7 @@
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-26
+            2021-03-07
         </p>
         <div class="tags">
             
@@ -518,46 +552,6 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/02/09/b024-javase09/">
-        <h2 class="post-title">
-            接口
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            为什么需要接口
-
-提供一种将接口与实现分离的更加结构化的方法
-可以进行多重继承，使其能够向上转型为多个基类型
-防止客户端程序员创建该接口的对象
-
-抽象类和抽象方法
-
-抽象类是介于普通类与接口之间的一种中庸之道。
-
-为什么需要抽象类和抽象方法
-基类存在的目的是为了给它的所有导出类创建一个通用接口，不同的子类可以用不同的方式表示此接口。通用接口建立起一种基本形式，以此表示所有导出类的共同部分。
-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-02-09
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -602,7 +596,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="7">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="8">Design Patterns</a>
             
         
     </div>
@@ -648,7 +642,11 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     <ul>
       
         <li>
-          <a href="/2021/04/26/b044-pattern07/">抽象工厂模式（Abstract Factory）</a>
+          <a href="/2021/03/08/b045-pattern08/">单件模式（Singleton）</a>
+        </li>
+      
+        <li>
+          <a href="/2021/03/07/b044-pattern07/">抽象工厂模式（Abstract Factory）</a>
         </li>
       
         <li>
@@ -661,10 +659,6 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
       
         <li>
           <a href="/2021/03/04/b041-pattern04/">装饰者模式（Decorator）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/03/b040-pattern03/">观察者模式（Observer）</a>
         </li>
       
     </ul>

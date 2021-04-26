@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          设计原则 - Liaoii&#39;s Blog
+          单件模式（Singleton） - Liaoii&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/2021/03/01/b038-pattern01/">
+    <link rel="canonical" href="https://liaoii.github.io/2021/03/08/b045-pattern08/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -89,11 +89,11 @@
                               <a class="tag" href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
                             
                         </div>
-                        <h1>设计原则</h1>
+                        <h1>单件模式（Singleton）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Liaoxi on
-                            2021-03-01
+                            2021-03-08
                         </span>
                     </div>
                 
@@ -210,30 +210,34 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="设计原则">设计原则</span></h3>
-<ol>
-<li>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起</li>
-<li>针对接口编程，而不是针对实现编程</li>
-<li>多用组合，少用继承</li>
-<li>为了交互对象之间的松耦合设计而努力</li>
-<li>开闭原则：类应该对扩展开放，对修改关闭</li>
-<li>依赖倒置原则：要依赖抽象，不要依赖具体类</li>
-</ol>
-<h3><span id="设计模式">设计模式</span></h3>
-<p><strong>策略模式（Strategy）</strong></p>
-<p>策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
-<p><strong>观察者模式（Observer）</strong></p>
-<p>观察者模式定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。</p>
-<p><strong>装饰者模式（Decorator）</strong></p>
-<p>装饰者模式动态地将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方案。</p>
-<p><strong>简单工厂（Simple Factory）</strong></p>
-<p>简单工厂用来处理创建对象的细节。</p>
-<p><strong>工厂方法模式</strong></p>
-<p>工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。</p>
-<p><strong>抽象工厂模式</strong></p>
-<p>抽象工厂模式提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。</p>
-<p><strong>单件模式</strong></p>
+                <h3><span id="抛出问题">抛出问题</span></h3>
+<p>有一些对象我们只需要一个，这类对象只能有一个实例，如果制造出多个实例，就会导致许多问题产生。</p>
+<h3><span id="使用全局静态变量实现单实例">使用全局静态变量实现单实例</span></h3>
+<p><strong>缺点</strong></p>
+<p>如果将对象赋值给一个全局变量，那么必须在程序一开始就创建好对象，如果这个对象非常耗费资源，而程序在这次的执行过程中又一直没有用到它，那就会造成资源的浪费。</p>
+<h3><span id="经典的单件模式实现">经典的单件模式实现</span></h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>利用一个静态变量来记录Singleton类的唯一实例</li>
+<li>将构造器声明为私有的，只有Singleton自身可以调用构造器</li>
+<li>使用静态方法返回实例</li>
+<li>使用延迟实例化（lazy instance），可以在我们使用对象时才进行创建</li>
+</ul>
+<h3><span id="定义单件模式">定义单件模式</span></h3>
 <p>确保一个类只有一个实例，并提供一个全局访问点。</p>
+<h3><span id="经典单件模式实现存在的问题">经典单件模式实现存在的问题</span></h3>
+<p>在多线程环境下，经典的单件模式实现有可能会产生多个实例。</p>
+<h3><span id="处理多线程问题">处理多线程问题</span></h3>
+<p><strong>同步方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在getInstance()方法上加上synchronized关键字，可以保证在多线程环境下也不会产生多个实例。</p>
+<p>但是在方法上使用synchronized会降低性能，其实只有在第一次执行此方法时才真正需要同步，一旦设置好uniqueInstance变量，就不再需要同步这个方法了。之后每次调用这个方法，同步都是一种累赘。</p>
+<p><strong>使用急切方式创建实例，而不是使用延迟实例化</strong></p>
+<p>如果应用程序总是创建并使用单件实例，或者在创建和运行时方面的负担不太繁重，可以使用急切（eagerly）创建方式创建实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用双重检测锁</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>valatile关键词确保当uniqueInstance变量被初始化成Singleton实例时，多个线程正确地处理uniqueInstance变量。</p>
 
                 
 
@@ -241,13 +245,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/03/02/b039-pattern02/" data-toggle="tooltip" data-placement="top" title="策略模式（Strategy）">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2021/02/20/b035-javase20/" data-toggle="tooltip" data-placement="top" title="注解">Next Post &rarr;</a>
+                            <a href="/2021/03/07/b044-pattern07/" data-toggle="tooltip" data-placement="top" title="抽象工厂模式（Abstract Factory）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -277,7 +277,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">设计原则</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">设计模式</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">抛出问题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用全局静态变量实现单实例</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">经典的单件模式实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">定义单件模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">经典单件模式实现存在的问题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">处理多线程问题</span></a></li></ol>
         
         </div>
       </aside>
@@ -317,8 +317,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "https://liaoii.github.io/2021/03/01/b038-pattern01/";
-    var disqus_url = "https://liaoii.github.io/2021/03/01/b038-pattern01/";
+    var disqus_identifier = "https://liaoii.github.io/2021/03/08/b045-pattern08/";
+    var disqus_url = "https://liaoii.github.io/2021/03/08/b045-pattern08/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
