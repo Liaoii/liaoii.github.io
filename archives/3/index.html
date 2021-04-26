@@ -209,6 +209,84 @@
 
 <div class="post-preview">
 
+    <a href="/2021/01/07/b008-redis08/">
+        <h2 class="post-title">
+            [Redis-08]Redis设计优化
+        </h2>
+        <h3 class="post-subtitle">
+            通过Redis内存模型与内存编码估算Redis内存使用量
+        </h3>
+        <div class="post-content-preview">
+            估算Redis内存使用量
+
+Redis中的数据的内存大小与Redis的内存模型以及对象的内存编码有关
+假设有100000个字符串类型的键值对，每个key的长度是12个字节，每个value的长度也是12个字节，且key和value都不是整数，要如何计算这100000个键值对所占的内存大小。
+
+首先，Redis的外层是一个hashtable，其结构如下：
+
+字符串的内存模型如下：
+
+Redis的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-01-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/01/07/b007-redis07/">
+        <h2 class="post-title">
+            [Redis-07]Redis对象类型与内存编码
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            字符串（SDS）
+
+字符串是最基础的类型，所有的键都是字符串类型，且字符串之外的其他几种复杂类型的元素也是字符串
+字符串的长度不能超过512M
+字符串类型的内部编码有3种
+
+int
+8个字节的长整型。当字符串的值是整型时，这个值使用long整型表示
+embstr
+小于等于44字节的字符串
+raw
+大于44个字节的字符串
+embstr与raw的区别
+embstr与raw都使用redisObje......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-01-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Redis" title="Redis">Redis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/01/06/b006-redis06/">
         <h2 class="post-title">
             [Redis-06]Redis数据存储的细节
@@ -437,7 +515,7 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="5">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="7">Design Patterns</a>
             
         
     </div>
@@ -483,7 +561,15 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
     <ul>
       
         <li>
-          <a href="/2021/04/24/b042-pattern05/">简单工厂（Factory）</a>
+          <a href="/2021/04/26/b044-pattern07/">抽象工厂模式（Abstract Factory）</a>
+        </li>
+      
+        <li>
+          <a href="/2021/03/06/b043-pattern06/">工厂方法模式（Factory Method Pattern）</a>
+        </li>
+      
+        <li>
+          <a href="/2021/03/05/b042-pattern05/">简单工厂（Simple Factory）</a>
         </li>
       
         <li>
@@ -492,14 +578,6 @@ Redis在启动时其主进程会占用一定的内存空间，这部分内存大
       
         <li>
           <a href="/2021/03/03/b040-pattern03/">观察者模式（Observer）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/02/b039-pattern02/">策略模式（Strategy）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/01/b038-pattern01/">设计原则</a>
         </li>
       
     </ul>

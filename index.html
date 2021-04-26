@@ -209,9 +209,75 @@
 
 <div class="post-preview">
 
-    <a href="/2021/04/24/b042-pattern05/">
+    <a href="/2021/04/26/b044-pattern07/">
         <h2 class="post-title">
-            简单工厂（Factory）
+            抽象工厂模式（Abstract Factory）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            依赖倒置原则
+要依赖抽象、不要依赖具体类。
+该原则与【针对接口编程，不针对实现编程】不同，依赖倒置原则更强调抽象，它的意思是说：不能让高层组件依赖低层组件，而且，不管高层或低层组件，两者都应该依赖于抽象。
+举例
+123456789101112131415161718public class PizzaStore &#123;    Pizza orderPizza(String type) ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-04-26
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/03/06/b043-pattern06/">
+        <h2 class="post-title">
+            工厂方法模式（Factory Method Pattern）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            定义工厂方法模式
+工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。
+
+
+工厂方法让子类决定要实例化的类是哪一个，并不是指模式允许子类本身在运行时做决定，而是指在编写创建者类时，不需要知道实际创建的产品是哪一个。选择了使用哪个子类，自然就决定了实际创建的产品是什么。
+Creator是一个类，它实现了所有操纵产品的方法，但不实现工厂方法
+C......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/03/05/b042-pattern05/">
+        <h2 class="post-title">
+            简单工厂（Simple Factory）
         </h2>
         <h3 class="post-subtitle">
             
@@ -225,7 +291,7 @@
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-04-24
+            2021-03-05
         </p>
         <div class="tags">
             
@@ -365,13 +431,12 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 针对接口编程，而不是针对实现编程
 多用组合，少用继承
 为了交互对象之间的松耦合设计而努力
-类应该对扩展开放，对修改关闭
+开闭原则：类应该对扩展开放，对修改关闭
+依赖倒置原则：要依赖抽象，不要依赖具体类
 
 设计模式
 策略模式（Strategy）
-策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。
-观察者模式（Observer）
-观察者......
+策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用......
         </div>
     </a>
     
@@ -493,68 +558,6 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/02/08/b023-javase08/">
-        <h2 class="post-title">
-            多态
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            为什么能够向上转型
-对象既可以作为它自己本身的类型使用，也可以作为它的基类型使用，把对某个对象的引用视为对其基类型的引用的做法被称作向上转型。从导出类向上转型到基类可能会缩小接口，但不会比基类的全部接口更窄。
-12345678910111213141516171819class Instrument &#123;    public void play(Note n) &#123;     ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-02-08
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/02/07/b022-javase07/">
-        <h2 class="post-title">
-            复用类
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            使用组合进行复用
-
-在新的类中产生现有类的对象叫做组合。组合只是复用了现有程序代码的功能，而非它的形式。对于非基本类型的对象，必须将其引用置于新类中，而对于基本类型数据则可以直接定义。
-
-1234567891011121314151617class WaterSource &#123;    private String s;    WaterSource() &#123;        S......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-02-07
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -599,7 +602,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="5">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="7">Design Patterns</a>
             
         
     </div>
@@ -645,7 +648,15 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     <ul>
       
         <li>
-          <a href="/2021/04/24/b042-pattern05/">简单工厂（Factory）</a>
+          <a href="/2021/04/26/b044-pattern07/">抽象工厂模式（Abstract Factory）</a>
+        </li>
+      
+        <li>
+          <a href="/2021/03/06/b043-pattern06/">工厂方法模式（Factory Method Pattern）</a>
+        </li>
+      
+        <li>
+          <a href="/2021/03/05/b042-pattern05/">简单工厂（Simple Factory）</a>
         </li>
       
         <li>
@@ -654,14 +665,6 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
       
         <li>
           <a href="/2021/03/03/b040-pattern03/">观察者模式（Observer）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/02/b039-pattern02/">策略模式（Strategy）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/01/b038-pattern01/">设计原则</a>
         </li>
       
     </ul>
