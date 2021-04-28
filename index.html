@@ -209,6 +209,40 @@
 
 <div class="post-preview">
 
+    <a href="/2021/03/09/b046-pattern09/">
+        <h2 class="post-title">
+            命令模式（Command）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            定义命令模式
+命令模式将请求封装成对象，以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。
+
+
+Client负责创建一个ConcreteCommand，并设置其接收者Recelver
+ConcreteCommand定义了动作和接收者之间的绑定关系。调用者只要调用execute()方法就可以发出请求，然后由ConcreteCommand调用接收者的一个或多个动作。
+......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-09
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/03/08/b045-pattern08/">
         <h2 class="post-title">
             单件模式（Singleton）
@@ -520,38 +554,6 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/02/19/b034-javase19/">
-        <h2 class="post-title">
-            枚举
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            新建一个枚举到底发生了什么
-新建一个枚举类
-123enum Explore &#123;	HERE, THERE&#125;
-对其进行反编译
-1234567final class Explore extends java.lang.Enum &#123;	public static final Explore HERE;	public static final Explore THERE;	......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-02-19
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -596,7 +598,7 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="8">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="9">Design Patterns</a>
             
         
     </div>
@@ -642,6 +644,10 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
     <ul>
       
         <li>
+          <a href="/2021/03/09/b046-pattern09/">命令模式（Command）</a>
+        </li>
+      
+        <li>
           <a href="/2021/03/08/b045-pattern08/">单件模式（Singleton）</a>
         </li>
       
@@ -655,10 +661,6 @@ Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于
       
         <li>
           <a href="/2021/03/05/b042-pattern05/">简单工厂（Simple Factory）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/04/b041-pattern04/">装饰者模式（Decorator）</a>
         </li>
       
     </ul>
