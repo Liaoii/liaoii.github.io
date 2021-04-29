@@ -209,6 +209,38 @@
 
 <div class="post-preview">
 
+    <a href="/2021/02/20/b035-javase20/">
+        <h2 class="post-title">
+            注解
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            定义注解
+123456@Target(ElementType.METHOD)@Retention(RetentionPolicy.RUNTIME)public @interface UseCase &#123;    int id();    String description() default "no description";&#125;
+特性
+
+注解的定义使用@interface来......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-02-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JavaSE" title="JavaSE">JavaSE</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/02/19/b034-javase19/">
         <h2 class="post-title">
             枚举
@@ -535,40 +567,6 @@ Zset
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/01/11/b011-redis11/">
-        <h2 class="post-title">
-            [Redis-11]Redis主从复制
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            什么是主从复制
-Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redis服务重启后会将硬盘上持久化的数据恢复到内存中。既然Redis的数据是持久化到硬盘的，如果Redis服务器的硬盘损坏，这时就可能导致数据的丢失。通过Redis的主从复制机制就可以避免这种单点故障问题。
-如图所示：
-
-说明：
-
-此时的Redis由多个Redis服务组成，其中一个作为主Redis，其他作为从R......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-01-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -617,7 +615,7 @@ Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redi
             
         
             
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="9">Design Patterns</a>
+            <a href="/tags/#Design Patterns" title="Design Patterns" rel="10">Design Patterns</a>
             
         
     </div>
@@ -663,6 +661,10 @@ Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redi
     <ul>
       
         <li>
+          <a href="/2021/04/28/b047-pattern10/">适配器模式（Adapter）</a>
+        </li>
+      
+        <li>
           <a href="/2021/03/09/b046-pattern09/">命令模式（Command）</a>
         </li>
       
@@ -676,10 +678,6 @@ Redis的持久化保证了Redis在服务重启时不会丢失数据，因为Redi
       
         <li>
           <a href="/2021/03/06/b043-pattern06/">工厂方法模式（Factory Method Pattern）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/05/b042-pattern05/">简单工厂（Simple Factory）</a>
         </li>
       
     </ul>
