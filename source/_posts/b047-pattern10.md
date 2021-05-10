@@ -14,8 +14,6 @@ tags:
 
 ![适配器模式](adapter.png)
 
-
-
 ### 实例
 
 需要将Turkey适配成Duck
