@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - Liaoii&#39;s Blog
+          JVM基本认识 - Liaoii&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/about/">
+    <link rel="canonical" href="https://liaoii.github.io/2021/05/01/b060-jvm01/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/Iron-Man-3.jpg')
-            /*page*/
+            background-image: url('null')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                            
+                        </div>
+                        <h1>JVM基本认识</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Liaoxi on
+                            2021-05-01
+                        </span>
                     </div>
                 
 
@@ -189,169 +197,200 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <blockquote>
-<p>光有好奇心而不去實踐，等於自願放棄成功機會<br>
-別為自己畫地自限，Just Do It！！</p>
-</blockquote>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h3><span id="jvm">JVM</span></h3>
+<p><img src="jvm.png" alt="JVM"></p>
+<ul>
+<li>Java编译器将Java文件编译成字节码文件</li>
+<li>不同操作系统中的JVM对字节码文件进行加载</li>
+<li>JVM通过解释器将字节码翻译成对应操作系统的机器码</li>
+</ul>
+<h3><span id="jdk-jre-jvm之间的关系">JDK、JRE、JVM之间的关系</span></h3>
+<ul>
+<li>JDK：Java开发工具包</li>
+<li>JRE：Java运行时环境</li>
+<li>JVM：Java虚拟机</li>
+</ul>
+<p><img src="relationship.png" alt="关系"></p>
+<h3><span id="oraclejdk与openjdk的关系">OracleJDK与OpenJDK的关系</span></h3>
+<ul>
+<li>
+<p>2006年SUN公司将Java开源，此时的JDK即为OpenJDK。OpenJDK是JavaSE的开源实现，由SUN和Java社区提供支持。</p>
+</li>
+<li>
+<p>2009年Oracle收购SUN公司，Oracle在OpenJDK的基础上构建了OracleJDK，OpenJDK与OracleJDK的源码大部分是相同的。</p>
+<p><strong>区别</strong></p>
+</li>
+<li>
+<p>OpenJDK根据GPL v2协议发布，GPL v2允许在商业上使用。</p>
+</li>
+<li>
+<p>OracleJDK根据JRL协议发布，JRL只允许个人研究使用，如果需要进行商用就需要进行授权。</p>
+</li>
+</ul>
+<h3><span id="jvm与hotspot的关系">JVM与Hotspot的关系</span></h3>
+<p><img src="hotspot.png" alt="hotspot"></p>
+<ul>
+<li>JVM是一个Java虚拟机规范</li>
+<li>HotSpot是遵循JVM规范实现的一种Java虚拟机，不同的公司可以根据JVM规范实现不同的Java虚拟机</li>
+</ul>
+<h3><span id="java与jvm的关系">Java与JVM的关系</span></h3>
+<p><img src="language.png" alt="language"></p>
+<ul>
+<li>首先，JVM只认识Java字节码文件</li>
+<li>只要某种语言的源代码能编译成Java字节码文件，就可以在JVM中运行</li>
+</ul>
+<h3><span id="jvm的运行模式">JVM的运行模式</span></h3>
+<p>Server、Client</p>
+<ul>
+<li>Client模式启动速度较快、Server模式启动速度较慢</li>
+<li>在进入稳定运行期后Server模式的运行速度比Client模式快</li>
+</ul>
+<h3><span id="jvm架构图">JVM架构图</span></h3>
+<p><img src="project.png" alt="project"></p>
 
-                <!-- 如果开启评论功能 -->
                 
-                    <hr>
 
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2021/05/07/b061-jvm02/" data-toggle="tooltip" data-placement="top" title="JIT编译器">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2021/04/28/b047-pattern10/" data-toggle="tooltip" data-placement="top" title="适配器模式（Adapter）">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
-                    
-                    <!-- disqus 评论框 start -->
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
                     <div class="comment">
                         <div id="disqus_thread" class="disqus-thread"></div>
                     </div>
-                    <!-- disqus 评论框 end -->
-                    
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
 
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JVM</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">JDK、JRE、JVM之间的关系</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">OracleJDK与OpenJDK的关系</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">JVM与Hotspot的关系</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Java与JVM的关系</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">JVM的运行模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">JVM架构图</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
 
-                    
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-                    
-                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = "your-disqus-ID";
-                        var disqus_identifier = "https://liaoii.github.io/about/index.html";
-                        var disqus_url = "https://liaoii.github.io/about/index.html";
-
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
                         
-                    </script>
-                    <!-- disqus 公共JS代码 end -->
-                    
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="14">Redis</a>
-            
-        
-            
-            <a href="/tags/#JavaSE" title="JavaSE" rel="6">JavaSE</a>
-            
-        
-            
-            <a href="/tags/#Design Patterns" title="Design Patterns" rel="10">Design Patterns</a>
-            
-        
-            
-            <a href="/tags/#JVM" title="JVM" rel="2">JVM</a>
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/ironman-draw.png" />
-        
 
-        
-            <p>Hi, i&#39;m Liaoii</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "https://liaoii.github.io/2021/05/01/b060-jvm01/";
+    var disqus_url = "https://liaoii.github.io/2021/05/01/b060-jvm01/";
 
-            
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
-            
 
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2021/05/07/b061-jvm02/">JIT编译器</a>
-        </li>
-      
-        <li>
-          <a href="/2021/05/01/b060-jvm01/">JVM基本认识</a>
-        </li>
-      
-        <li>
-          <a href="/2021/04/28/b047-pattern10/">适配器模式（Adapter）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/09/b046-pattern09/">命令模式（Command）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/08/b045-pattern08/">单件模式（Singleton）</a>
-        </li>
-      
-    </ul>
-  </div>
 
-        <hr>
-    
-</div>
 
-        
-    </div>
-</div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

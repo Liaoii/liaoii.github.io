@@ -209,6 +209,82 @@
 
 <div class="post-preview">
 
+    <a href="/2021/03/02/b039-pattern02/">
+        <h2 class="post-title">
+            策略模式（Strategy）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            策略模式
+策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。
+相关设计原则
+
+找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起
+针对接口编程，而不是针对实现编程
+多用组合，少用继承
+
+使用继承来进行设计
+Duck类是所有鸭子的基类，具有共同的行为quack()和swim()，由于不同品种的鸭子具有不同的样子，所以......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/03/01/b038-pattern01/">
+        <h2 class="post-title">
+            设计原则
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            设计原则
+
+找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起
+针对接口编程，而不是针对实现编程
+多用组合，少用继承
+为了交互对象之间的松耦合设计而努力
+开闭原则：类应该对扩展开放，对修改关闭
+依赖倒置原则：要依赖抽象，不要依赖具体类
+
+设计模式
+策略模式（Strategy）
+策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Liaoxi on
+            2021-03-01
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/02/20/b035-javase20/">
         <h2 class="post-title">
             注解
@@ -496,77 +572,6 @@ Zset
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2021/01/13/b013-redis13/">
-        <h2 class="post-title">
-            [Redis-13]Redis集群演变
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            主从复制
-
-主从复制虽然解决了单点故障问题，但是当主Redis或者从Redis出现问题时需要进行手动处理，这个处理过程不仅麻烦还容易出错。
-
-主从复制+哨兵
-
-在主从复制的基础上加上哨兵机制，可以进行自动故障转移，解决了手动处理故障时带来的问题。
-
-架构图
-
-工作原理
-当Redis Master节点宕机的时候，Sentinel会选举出新的Master，并根据Sentinel中的client-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-01-13
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/01/12/b012-redis12/">
-        <h2 class="post-title">
-            [Redis-12]Redis Sentinel
-        </h2>
-        <h3 class="post-subtitle">
-            Redis哨兵机制
-        </h3>
-        <div class="post-content-preview">
-            Redis主从复制存在的问题
-在Redis主从架构中存在一个问题，那就是当服务出现宕机时需要手动恢复：
-
-从Redis宕机：如果从Redis宕机了，只需要将从Redis重新启动即可，从Redis在重新启动后会自动加入到主从架构中，并且自动完成数据的同步。在Redis 2.8版本后，从Redis断线后恢复只需要执行增量同步。
-主Redis宕机：当主Redis宕机了之后需要在从Redis中执行s......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-01-12
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Redis" title="Redis">Redis</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -618,6 +623,10 @@ Zset
             <a href="/tags/#Design Patterns" title="Design Patterns" rel="10">Design Patterns</a>
             
         
+            
+            <a href="/tags/#JVM" title="JVM" rel="2">JVM</a>
+            
+        
     </div>
 </section>
 
@@ -661,6 +670,14 @@ Zset
     <ul>
       
         <li>
+          <a href="/2021/05/07/b061-jvm02/">JIT编译器</a>
+        </li>
+      
+        <li>
+          <a href="/2021/05/01/b060-jvm01/">JVM基本认识</a>
+        </li>
+      
+        <li>
           <a href="/2021/04/28/b047-pattern10/">适配器模式（Adapter）</a>
         </li>
       
@@ -670,14 +687,6 @@ Zset
       
         <li>
           <a href="/2021/03/08/b045-pattern08/">单件模式（Singleton）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/07/b044-pattern07/">抽象工厂模式（Abstract Factory）</a>
-        </li>
-      
-        <li>
-          <a href="/2021/03/06/b043-pattern06/">工厂方法模式（Factory Method Pattern）</a>
         </li>
       
     </ul>

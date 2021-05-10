@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://liaoii.github.io/">
+    <link rel="canonical" href="https://liaoii.github.io/archives/4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -209,30 +209,31 @@
 
 <div class="post-preview">
 
-    <a href="/2021/05/07/b061-jvm02/">
+    <a href="/2021/01/02/b002-redis02/">
         <h2 class="post-title">
-            JIT编译器
+            [Redis-02]安装Redis服务与配置开机启动
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            JVM程序运行流程
+            使用install_server.sh安装服务
 
-为什么需要JIT即时编译器
-在部分商用虚拟机中，Java程序最初是通过解释器进行解释执行的，解释器会逐条将字节码翻译成机器码。如果某个方法需要被频繁调用、或者某个循环体中的代码需要被循环多次，那么将这些代码编译成与本地平台相关的机器码，每次调用时直接使用机器码，将会大大的提升整体的运行效率。将代码编译成与本地平台相关的机器码的过程就是JIT即时编译。
-热点代码
-程序中的......
+安装服务
+执行install_server.sh
+12cd /opt/redis-5.0.9/utils/./install_server.sh
+配置
+12345678910111213141516171819202122Please select the redis port for this instance: [6379] 6380 #......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-05-07
+            2021-01-02
         </p>
         <div class="tags">
             
-              <a href="/tags/#JVM" title="JVM">JVM</a>
+              <a href="/tags/#Redis" title="Redis">Redis</a>
             
         </div>
     
@@ -242,315 +243,32 @@
 
 <div class="post-preview">
 
-    <a href="/2021/05/01/b060-jvm01/">
+    <a href="/2021/01/01/b001-redis01/">
         <h2 class="post-title">
-            JVM基本认识
+            [Redis-01]Redis单机安装
         </h2>
         <h3 class="post-subtitle">
-            
+            CentOS7下安装Redis单机版
         </h3>
         <div class="post-content-preview">
-            JVM
+            安装
 
-
-Java编译器将Java文件编译成字节码文件
-不同操作系统中的JVM对字节码文件进行加载
-JVM通过解释器将字节码翻译成对应操作系统的机器码
-
-JDK、JRE、JVM之间的关系
-
-JDK：Java开发工具包
-JRE：Java运行时环境
-JVM：Java虚拟机
-
-
-OracleJDK与OpenJDK的关系
-
-
-2006年SUN公司将Java开源，此时的JDK即为OpenJDK。Op......
+安装gcc与wget
+12yum install -y gcc-c++yum install -y wget
+下载源码包
+进入Redis下载页，在需要下载的版本连接上点击右键，复制链接地址
+我选择的是redis-5.0.9.tar.gz，地址为 https://download.redis.io/releases/redis-5.0.9.tar.gz
+12cd /opt #可根据自身......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Liaoxi on
-            2021-05-01
+            2021-01-01
         </p>
         <div class="tags">
             
-              <a href="/tags/#JVM" title="JVM">JVM</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/04/28/b047-pattern10/">
-        <h2 class="post-title">
-            适配器模式（Adapter）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            定义适配器模式
-适配器模式将一个类的接口，转换成客户期望的另一个接口，适配器让原本接口不兼容的类可以合作无间。
-
-实例
-需要将Turkey适配成Duck
-1234public interface Duck &#123;    void quack();    void fly();&#125;
-12345678public class MallardDuck implements Duck ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-04-28
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/09/b046-pattern09/">
-        <h2 class="post-title">
-            命令模式（Command）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            定义命令模式
-命令模式将请求封装成对象，以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。
-
-
-Client负责创建一个ConcreteCommand，并设置其接收者Recelver
-ConcreteCommand定义了动作和接收者之间的绑定关系。调用者只要调用execute()方法就可以发出请求，然后由ConcreteCommand调用接收者的一个或多个动作。
-......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-09
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/08/b045-pattern08/">
-        <h2 class="post-title">
-            单件模式（Singleton）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            抛出问题
-有一些对象我们只需要一个，这类对象只能有一个实例，如果制造出多个实例，就会导致许多问题产生。
-使用全局静态变量实现单实例
-缺点
-如果将对象赋值给一个全局变量，那么必须在程序一开始就创建好对象，如果这个对象非常耗费资源，而程序在这次的执行过程中又一直没有用到它，那就会造成资源的浪费。
-经典的单件模式实现
-12345678910public class Singleton &#123;......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-08
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/07/b044-pattern07/">
-        <h2 class="post-title">
-            抽象工厂模式（Abstract Factory）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            依赖倒置原则
-要依赖抽象、不要依赖具体类。
-该原则与【针对接口编程，不针对实现编程】不同，依赖倒置原则更强调抽象，它的意思是说：不能让高层组件依赖低层组件，而且，不管高层或低层组件，两者都应该依赖于抽象。
-举例
-123456789101112131415161718public class PizzaStore &#123;    Pizza orderPizza(String type) ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-07
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/06/b043-pattern06/">
-        <h2 class="post-title">
-            工厂方法模式（Factory Method Pattern）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            定义工厂方法模式
-工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。
-
-
-工厂方法让子类决定要实例化的类是哪一个，并不是指模式允许子类本身在运行时做决定，而是指在编写创建者类时，不需要知道实际创建的产品是哪一个。选择了使用哪个子类，自然就决定了实际创建的产品是什么。
-Creator是一个类，它实现了所有操纵产品的方法，但不实现工厂方法
-C......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-06
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/05/b042-pattern05/">
-        <h2 class="post-title">
-            简单工厂（Simple Factory）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            使用new创建对象可能存在的问题
-以制作披萨为例：
-123456789101112131415161718192021222324252627282930//实例化单个类public class PizzaStore &#123;    Pizza orderPizza() &#123;        Pizza pizza = new CheesePizza();        pizza......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/04/b041-pattern04/">
-        <h2 class="post-title">
-            装饰者模式（Decorator）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            抛出需求
-有一个咖啡店需要设计它的订单系统，首先是各种种类的咖啡，且在购买咖啡时，可以根据需求加入各种调料。最后会根据咖啡的类型和所加入的调料收取不同的费用。
-
-第一种实现方式
-
-在基类中通过Boolean类型的成员变量来表示是否加入了某种调料，cost()方法用来计算这些调料的价格，子类的cost()方法通过调用基类的cost()来获取调料的总价格，再加上自身的价格来得到总的价格。
-123......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-04
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/03/03/b040-pattern03/">
-        <h2 class="post-title">
-            观察者模式（Observer）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            认识观察者模式
-主题 + 观察者 = 观察者模式
-
-
-主题对象管理某些数据
-当主题内的数据改变就会通知观察者
-观察者已经订阅主题以便在主题数据改变时能够收到更新
-
-观察者模式定义
-观察者模式定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。
-观察者模式类图
-
-
-在主题接口Subject中，对象可以使用此接口注册为观察者，或者把自己从观察者中删除......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Liaoxi on
-            2021-03-03
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+              <a href="/tags/#Redis" title="Redis">Redis</a>
             
         </div>
     
@@ -564,10 +282,10 @@ C......
 
 <ul class="pager">
     
-    
-        <li class="next">
-            <a href="/archives/2/">Older Posts &rarr;</a>
+        <li class="previous">
+            <a href="/archives/3/">&larr; Newer Posts</a>
         </li>
+    
     
 </ul>
 
