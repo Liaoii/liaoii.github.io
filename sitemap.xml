@@ -2,18 +2,8 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>https://liaoii.github.io/post-sitemap.xml</loc>
-        <lastmod>2021-05-12T14:42:06.626Z</lastmod>
-    </sitemap>
-
-    <sitemap>
         <loc>https://liaoii.github.io/page-sitemap.xml</loc>
-        <lastmod>2021-05-12T14:42:06.650Z</lastmod>
-    </sitemap>
-
-    <sitemap>
-        <loc>https://liaoii.github.io/tag-sitemap.xml</loc>
-        <lastmod>2021-05-12T14:42:06.618Z</lastmod>
+        <lastmod>2021-11-02T08:16:25.481Z</lastmod>
     </sitemap>
 
 </sitemapindex>
